@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mohammad AlShatti | Portfolio</title>
-  <meta name="description" content="Mohammad AlShatti – Educational Technology, Artificial Intelligence & Digital Design Specialist." />
+  <meta name="description" content="Mohammad AlShatti – Educational Technology, AI & Digital Design Specialist." />
 
   <style>
     :root{
@@ -23,8 +23,6 @@
 
       --glow: rgba(255,255,255,.16);
       --glow2: rgba(255,255,255,.10);
-
-      --pad: 22px;
     }
 
     *{ box-sizing: border-box; }
@@ -41,14 +39,6 @@
       overflow-x:hidden;
     }
 
-    /* ====== Layout ====== */
-    .wrap{
-      width: min(100%, var(--max));
-      margin: 0 auto;
-      padding: 28px 18px 60px;
-    }
-
-    /* Subtle background depth */
     .bg-glows{
       position: fixed;
       inset: 0;
@@ -59,17 +49,15 @@
         radial-gradient(900px 400px at 18% 8%, rgba(255,255,255,.06), transparent 60%),
         radial-gradient(800px 360px at 86% 18%, rgba(255,255,255,.05), transparent 60%),
         radial-gradient(900px 420px at 50% 92%, rgba(255,255,255,.04), transparent 60%);
-      filter: blur(0px);
     }
 
-    /* ====== Navbar ====== */
     .nav{
       position: sticky;
       top: 14px;
       z-index: 10;
       display:flex;
       justify-content:center;
-      margin-bottom: 18px;
+      margin: 18px 0 18px;
     }
     .nav-inner{
       width: min(100%, var(--max));
@@ -119,6 +107,7 @@
       border-radius: 999px;
       border: 1px solid transparent;
       transition: background .2s ease, border-color .2s ease, color .2s ease;
+      text-decoration:none;
     }
     .nav-links a:hover{
       background: rgba(255,255,255,.05);
@@ -126,12 +115,15 @@
       color: rgba(255,255,255,.88);
     }
 
-    @media (max-width: 680px){
-      .nav-links a{ padding: 7px 9px; }
-      .brand-title{ font-size: 12px; }
+    .wrap{
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      padding: 0 18px 60px;
+      position: relative;
+      z-index: 1;
     }
 
-    /* ====== Cards + Light Interaction ====== */
+    /* Cards with glow driven by --x --y */
     .card{
       position: relative;
       border-radius: var(--radius);
@@ -139,9 +131,7 @@
       border: 1px solid var(--line);
       box-shadow: var(--shadow);
       overflow:hidden;
-      z-index: 1;
     }
-
     .card::before{
       content:"";
       position:absolute;
@@ -152,11 +142,11 @@
         transparent 60%
       );
       opacity: 0;
-      transition: opacity .25s ease;
+      transition: opacity .22s ease;
       pointer-events:none;
       mix-blend-mode: screen;
     }
-    .card:hover::before{ opacity: 1; }
+    .card.is-lit::before{ opacity: 1; }
 
     .card::after{
       content:"";
@@ -197,24 +187,6 @@
       max-width: 70ch;
     }
 
-    .divider{
-      height:1px;
-      background: rgba(255,255,255,.10);
-      margin: 18px 0;
-    }
-
-    /* ====== Hero ====== */
-    .hero{
-      margin-top: 18px;
-    }
-
-    .hero-inner{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 16px;
-      text-align: left;
-    }
-
     .chips{
       display:flex;
       flex-wrap:wrap;
@@ -230,7 +202,6 @@
       border-radius: 999px;
     }
 
-    /* ====== Grid Sections ====== */
     .grid-2{
       display:grid;
       grid-template-columns: 1fr;
@@ -241,15 +212,6 @@
       .grid-2{ grid-template-columns: 1fr 1fr; }
     }
 
-    /* ====== Skills ====== */
-    .skills{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top: 8px;
-    }
-
-    /* ====== Projects ====== */
     .projects{
       display:grid;
       grid-template-columns: 1fr;
@@ -285,17 +247,8 @@
       background: rgba(255,255,255,.045);
       border-color: rgba(255,255,255,.16);
     }
-    .proj h3{
-      margin:0 0 6px;
-      font-size: 15px;
-      letter-spacing: .01em;
-    }
-    .proj p{
-      margin:0;
-      color: var(--muted);
-      font-size: 13.5px;
-      line-height: 1.6;
-    }
+    .proj h3{ margin:0 0 6px; font-size: 15px; }
+    .proj p{ margin:0; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
     .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
     .tag{
       font-size: 11px;
@@ -306,42 +259,18 @@
       border-radius: 999px;
     }
 
-    /* ====== Experience ====== */
-    .timeline{
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-      margin-top: 10px;
-    }
+    .timeline{ display:flex; flex-direction:column; gap: 12px; margin-top: 10px; }
     .item{
       border: 1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.03);
       border-radius: 16px;
       padding: 14px 16px;
     }
-    .item .top{
-      display:flex;
-      justify-content:space-between;
-      gap: 10px;
-      flex-wrap:wrap;
-      align-items:baseline;
-    }
-    .item .role{
-      font-weight: 650;
-      letter-spacing: .01em;
-    }
-    .item .date{
-      color: rgba(255,255,255,.55);
-      font-size: 12px;
-    }
-    .item .desc{
-      margin-top: 6px;
-      color: var(--muted);
-      font-size: 13.5px;
-      line-height: 1.65;
-    }
+    .item .top{ display:flex; justify-content:space-between; gap: 10px; flex-wrap:wrap; align-items:baseline; }
+    .item .role{ font-weight: 650; }
+    .item .date{ color: rgba(255,255,255,.55); font-size: 12px; }
+    .item .desc{ margin-top: 6px; color: var(--muted); font-size: 13.5px; line-height: 1.65; }
 
-    /* ====== Contact ====== */
     .contact-row{
       display:grid;
       grid-template-columns: 1fr;
@@ -369,12 +298,8 @@
       border-color: rgba(255,255,255,.16);
       transform: translateY(-1px);
     }
-    .small{
-      font-size: 12px;
-      color: rgba(255,255,255,.60);
-    }
+    .small{ font-size: 12px; color: rgba(255,255,255,.60); }
 
-    /* ====== Footer ====== */
     .footer{
       margin-top: 18px;
       text-align:center;
@@ -382,17 +307,59 @@
       font-size: 12px;
     }
 
-    /* Reduce motion */
+    /* ===== Collaborative cursors (remote users) ===== */
+    .presence-layer{
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .cursor{
+      position:absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.20);
+      box-shadow: 0 0 26px rgba(255,255,255,.10);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .cursor::after{
+      content:"";
+      position:absolute;
+      inset:-22px;
+      border-radius:999px;
+      background: radial-gradient(circle, rgba(255,255,255,.12), transparent 60%);
+      opacity:.9;
+    }
+    .cursor-label{
+      position:absolute;
+      top: 16px;
+      left: 18px;
+      font-size: 11px;
+      color: rgba(255,255,255,.75);
+      padding: 6px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.40);
+      white-space: nowrap;
+    }
+
     @media (prefers-reduced-motion: reduce){
       html{ scroll-behavior: auto; }
-      .card, .proj, .linkbox{ transition:none !important; }
-      .card::before, .proj::before{ display:none; }
+      .cursor::after{ display:none; }
+      .card::before{ display:none; }
     }
   </style>
 </head>
 
 <body>
   <div class="bg-glows"></div>
+
+  <!-- remote presence layer -->
+  <div class="presence-layer" id="presenceLayer" aria-hidden="true"></div>
 
   <!-- NAV -->
   <div class="nav">
@@ -414,7 +381,7 @@
   <main class="wrap">
 
     <!-- HERO -->
-    <section class="card hero glow-track" id="top">
+    <section class="card glow-track" id="heroCard">
       <div class="section">
         <div class="kicker">Portfolio</div>
         <h1>Mohammad AlShatti</h1>
@@ -447,8 +414,7 @@
       <section class="card glow-track" id="skills">
         <div class="section">
           <div class="kicker">Skills</div>
-
-          <div class="skills">
+          <div class="chips">
             <span class="chip">AI in Education</span>
             <span class="chip">Academic Automation</span>
             <span class="chip">Assessment Systems</span>
@@ -456,10 +422,9 @@
             <span class="chip">UI/UX Structure</span>
             <span class="chip">Content & Visual Design</span>
           </div>
-
-          <div class="divider"></div>
-
-          <div class="small">Tip: Replace skills with your real tools (e.g., Python, Power Automate, Excel, Velo, etc.).</div>
+          <div class="small" style="margin-top:14px">
+            Replace skills later with your real tools (Python, Power Automate, Excel, etc.).
+          </div>
         </div>
       </section>
     </section>
@@ -469,7 +434,7 @@
       <div class="section">
         <div class="kicker">Projects</div>
 
-        <div class="projects" id="projGrid">
+        <div class="projects">
           <article class="proj glow-card">
             <h3>Smart Educational Evaluator</h3>
             <p>AI-driven evaluation system for student work with structured scoring and reporting.</p>
@@ -488,15 +453,12 @@
 
           <article class="proj glow-card">
             <h3>Design Systems for Education</h3>
-            <p>Clean, premium layouts for educational content, profiles, and digital assets.</p>
+            <p>Clean premium layouts for educational content, profiles, and digital assets.</p>
             <div class="tags">
               <span class="tag">Design</span><span class="tag">Layout</span><span class="tag">Brand</span>
             </div>
           </article>
         </div>
-
-        <div class="divider"></div>
-        <div class="small">Replace these 3 projects with your real titles + one sentence + 3 tags.</div>
       </div>
     </section>
 
@@ -504,7 +466,6 @@
     <section class="card glow-track" id="experience" style="margin-top:16px">
       <div class="section">
         <div class="kicker">Experience</div>
-
         <div class="timeline">
           <div class="item">
             <div class="top">
@@ -515,20 +476,7 @@
               Building digital academic systems, automating workflows, and designing learning experiences that support clarity, scale, and impact.
             </div>
           </div>
-
-          <div class="item">
-            <div class="top">
-              <div class="role">AI-Driven Educational Tools</div>
-              <div class="date">Projects • Ongoing</div>
-            </div>
-            <div class="desc">
-              Designing AI-based evaluation models, smart rubrics, and structured tools to improve performance measurement and learning outcomes.
-            </div>
-          </div>
         </div>
-
-        <div class="divider"></div>
-        <div class="small">You can convert this into a real timeline with years + institutions later.</div>
       </div>
     </section>
 
@@ -536,21 +484,16 @@
     <section class="card glow-track" id="contact" style="margin-top:16px">
       <div class="section">
         <div class="kicker">Contact</div>
-
         <div class="contact-row">
           <a class="linkbox" href="mailto:your@email.com">
             <span>Email</span>
             <span class="small">your@email.com</span>
           </a>
-
           <a class="linkbox" href="#" target="_blank" rel="noopener">
             <span>LinkedIn</span>
             <span class="small">Add your profile link</span>
           </a>
         </div>
-
-        <div class="divider"></div>
-        <div class="small">Replace links with your real email + LinkedIn URL.</div>
       </div>
     </section>
 
@@ -558,34 +501,210 @@
   </main>
 
   <script>
-    // Light interaction for all cards (hero + sections)
-    (function(){
-      const cards = document.querySelectorAll(".glow-track");
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    /**
+     * Real-time collaborative animations
+     * - Sync cursor positions + "light glow" on sections
+     * - Works in two modes:
+     *   A) BroadcastChannel (same device tabs)
+     *   B) WebSocket (cross-device) if COLLAB_WS_URL is set
+     */
+
+    // ======= CONFIG =======
+    const SELF_NAME = "Guest";
+    const COLLAB_WS_URL = ""; // مثال: "ws://localhost:8787"  <-- خلّه فاضي إذا تبي BroadcastChannel فقط
+
+    // ======= Helpers =======
+    const uid = (() => {
+      // stable per-tab id
+      const key = "collab_uid";
+      let v = sessionStorage.getItem(key);
+      if (!v) { v = crypto.randomUUID?.() || String(Math.random()).slice(2); sessionStorage.setItem(key, v); }
+      return v;
+    })();
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const presenceLayer = document.getElementById("presenceLayer");
+    const cards = Array.from(document.querySelectorAll(".glow-track"));
+    const glowCards = Array.from(document.querySelectorAll(".glow-card"));
+
+    // throttle to ~30fps
+    const throttle = (fn, ms=33) => {
+      let last = 0, t;
+      return (...args) => {
+        const now = performance.now();
+        if (now - last >= ms) { last = now; fn(...args); }
+        else {
+          clearTimeout(t);
+          t = setTimeout(() => { last = performance.now(); fn(...args); }, ms - (now-last));
+        }
+      };
+    };
+
+    const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+
+    // ======= Transport (BroadcastChannel + optional WebSocket) =======
+    const channel = new BroadcastChannel("portfolio-collab");
+    let ws = null;
+
+    function send(msg){
+      msg.ts = Date.now();
+      channel.postMessage(msg);
+      if (ws && ws.readyState === 1) ws.send(JSON.stringify(msg));
+    }
+
+    function connectWS(){
+      if (!COLLAB_WS_URL) return;
+      try{
+        ws = new WebSocket(COLLAB_WS_URL);
+        ws.addEventListener("message", (ev) => {
+          try { onMessage(JSON.parse(ev.data)); } catch {}
+        });
+      }catch{}
+    }
+    connectWS();
+
+    channel.addEventListener("message", (ev) => onMessage(ev.data));
+
+    // ======= Presence UI (remote cursors) =======
+    const peers = new Map(); // id -> {x,y,last,name,el,label}
+
+    function ensurePeer(id, name){
+      let p = peers.get(id);
+      if (p) return p;
+
+      const el = document.createElement("div");
+      el.className = "cursor";
+      const label = document.createElement("div");
+      label.className = "cursor-label";
+      label.textContent = name || "Visitor";
+
+      el.appendChild(label);
+      presenceLayer.appendChild(el);
+
+      p = { x: 0, y: 0, last: Date.now(), name: name || "Visitor", el, label };
+      peers.set(id, p);
+      return p;
+    }
+
+    function setPeerPos(p, x, y){
+      p.x = x; p.y = y; p.last = Date.now();
+      p.el.style.left = x + "px";
+      p.el.style.top  = y + "px";
+    }
+
+    // Remove stale peers
+    setInterval(() => {
+      const now = Date.now();
+      for (const [id, p] of peers){
+        if (now - p.last > 8000){
+          p.el.remove();
+          peers.delete(id);
+        }
+      }
+    }, 2000);
+
+    // ======= Glow Application =======
+    function setGlowOnElement(el, x, y){
+      el.style.setProperty("--x", x + "px");
+      el.style.setProperty("--y", y + "px");
+      el.classList.add("is-lit");
+      // fade out after a moment
+      clearTimeout(el._litTimer);
+      el._litTimer = setTimeout(() => el.classList.remove("is-lit"), 220);
+    }
+
+    function findNearestCard(clientX, clientY){
+      // choose the card whose rect contains pointer; fallback nearest center
+      for (const c of cards){
+        const r = c.getBoundingClientRect();
+        if (clientX >= r.left && clientX <= r.right && clientY >= r.top && clientY <= r.bottom){
+          return { el: c, rect: r };
+        }
+      }
+      // nearest by center distance
+      let best = null;
+      for (const c of cards){
+        const r = c.getBoundingClientRect();
+        const cx = (r.left + r.right)/2;
+        const cy = (r.top + r.bottom)/2;
+        const d = (clientX-cx)**2 + (clientY-cy)**2;
+        if (!best || d < best.d) best = { el: c, rect: r, d };
+      }
+      return best ? { el: best.el, rect: best.rect } : null;
+    }
+
+    // ======= Incoming messages =======
+    function onMessage(msg){
+      if (!msg || msg.id === uid) return;
       if (prefersReduced) return;
 
-      function setGlow(el, x, y){
-        el.style.setProperty("--x", x + "px");
-        el.style.setProperty("--y", y + "px");
+      if (msg.type === "cursor"){
+        const p = ensurePeer(msg.id, msg.name);
+        // msg.x/y are viewport coords
+        setPeerPos(p, msg.x, msg.y);
+
+        // Also light up the nearest section using the remote cursor
+        const hit = findNearestCard(msg.x, msg.y);
+        if (hit){
+          const lx = clamp(msg.x - hit.rect.left, 0, hit.rect.width);
+          const ly = clamp(msg.y - hit.rect.top, 0, hit.rect.height);
+          setGlowOnElement(hit.el, lx, ly);
+        }
       }
 
-      cards.forEach(card => {
-        card.addEventListener("mousemove", (e) => {
-          const r = card.getBoundingClientRect();
-          setGlow(card, e.clientX - r.left, e.clientY - r.top);
-        });
-      });
+      if (msg.type === "projectGlow"){
+        // targeted glow for a project card
+        const idx = msg.index;
+        const el = glowCards[idx];
+        if (!el) return;
+        const r = el.getBoundingClientRect();
+        const lx = clamp(msg.x - r.left, 0, r.width);
+        const ly = clamp(msg.y - r.top, 0, r.height);
+        el.style.setProperty("--px", lx + "px");
+        el.style.setProperty("--py", ly + "px");
+      }
+    }
 
-      // Extra glow inside project cards
-      const projCards = document.querySelectorAll(".glow-card");
-      projCards.forEach(p => {
-        p.addEventListener("mousemove", (e) => {
-          const r = p.getBoundingClientRect();
-          p.style.setProperty("--px", (e.clientX - r.left) + "px");
-          p.style.setProperty("--py", (e.clientY - r.top) + "px");
-        });
+    // ======= Local pointer -> broadcast =======
+    const sendCursor = throttle((e) => {
+      const x = e.clientX, y = e.clientY;
+      send({ type: "cursor", id: uid, name: SELF_NAME, x, y });
+    }, 33);
+
+    // Make local cards glow too (same as before) + broadcast collaboration
+    const localCardGlow = throttle((e) => {
+      const t = e.currentTarget;
+      const r = t.getBoundingClientRect();
+      setGlowOnElement(t, e.clientX - r.left, e.clientY - r.top);
+    }, 16);
+
+    cards.forEach(card => {
+      card.addEventListener("mousemove", (e) => {
+        localCardGlow(e);
+        sendCursor(e);
       });
-    })();
+      card.addEventListener("mouseleave", () => card.classList.remove("is-lit"));
+    });
+
+    // Project cards have their own inner glow; sync it too
+    glowCards.forEach((p, index) => {
+      const onMove = throttle((e) => {
+        const r = p.getBoundingClientRect();
+        const px = e.clientX - r.left;
+        const py = e.clientY - r.top;
+        p.style.setProperty("--px", px + "px");
+        p.style.setProperty("--py", py + "px");
+        send({ type:"projectGlow", id: uid, index, x: e.clientX, y: e.clientY });
+      }, 33);
+
+      p.addEventListener("mousemove", onMove);
+    });
+
+    // Let others see you even if you're not over a card
+    window.addEventListener("mousemove", throttle((e) => {
+      // only broadcast lightly if within viewport
+      send({ type: "cursor", id: uid, name: SELF_NAME, x: e.clientX, y: e.clientY });
+    }, 80));
   </script>
 </body>
 </html>

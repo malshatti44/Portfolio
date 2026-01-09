@@ -1,103 +1,591 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mohammad AlShatti</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammad AlShatti | Portfolio</title>
+  <meta name="description" content="Mohammad AlShatti – Educational Technology, Artificial Intelligence & Digital Design Specialist." />
 
   <style>
-    *{
-      box-sizing: border-box;
+    :root{
+      --bg:#000;
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --muted2: rgba(255,255,255,.55);
+
+      --card: rgba(255,255,255,.045);
+      --line: rgba(255,255,255,.12);
+      --line2: rgba(255,255,255,.09);
+
+      --shadow: 0 28px 90px rgba(0,0,0,.70);
+      --radius: 18px;
+      --max: 1080px;
+
+      --glow: rgba(255,255,255,.16);
+      --glow2: rgba(255,255,255,.10);
+
+      --pad: 22px;
     }
 
+    *{ box-sizing: border-box; }
+    html{ scroll-behavior: smooth; }
     body{
-      margin: 0;
-      min-height: 100vh;
-      background: #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+      margin:0;
+      min-height:100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
                    "Segoe UI", Inter, Arial, sans-serif;
-      color: #fff;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      overflow-x:hidden;
     }
 
-    /* Hero Box */
-    .hero-box{
+    /* ====== Layout ====== */
+    .wrap{
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      padding: 28px 18px 60px;
+    }
+
+    /* Subtle background depth */
+    .bg-glows{
+      position: fixed;
+      inset: 0;
+      pointer-events:none;
+      z-index: 0;
+      opacity: .85;
+      background:
+        radial-gradient(900px 400px at 18% 8%, rgba(255,255,255,.06), transparent 60%),
+        radial-gradient(800px 360px at 86% 18%, rgba(255,255,255,.05), transparent 60%),
+        radial-gradient(900px 420px at 50% 92%, rgba(255,255,255,.04), transparent 60%);
+      filter: blur(0px);
+    }
+
+    /* ====== Navbar ====== */
+    .nav{
+      position: sticky;
+      top: 14px;
+      z-index: 10;
+      display:flex;
+      justify-content:center;
+      margin-bottom: 18px;
+    }
+    .nav-inner{
+      width: min(100%, var(--max));
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      padding: 12px 14px;
+      border: 1px solid var(--line2);
+      background: rgba(255,255,255,.03);
+      border-radius: 999px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 16px 55px rgba(0,0,0,.55);
+    }
+    .brand{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      min-width: 0;
+    }
+    .brand-dot{
+      width: 10px; height:10px; border-radius:999px;
+      background: rgba(255,255,255,.55);
+      box-shadow: 0 0 18px rgba(255,255,255,.18);
+      flex: 0 0 auto;
+    }
+    .brand-title{
+      font-size: 13px;
+      color: rgba(255,255,255,.78);
+      letter-spacing: .02em;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .nav-links{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .nav-links a{
+      font-size: 12px;
+      color: rgba(255,255,255,.72);
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: background .2s ease, border-color .2s ease, color .2s ease;
+    }
+    .nav-links a:hover{
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.88);
+    }
+
+    @media (max-width: 680px){
+      .nav-links a{ padding: 7px 9px; }
+      .brand-title{ font-size: 12px; }
+    }
+
+    /* ====== Cards + Light Interaction ====== */
+    .card{
       position: relative;
-      width: min(90%, 900px);
-      padding: 44px 36px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.12);
-      text-align: center;
-      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      z-index: 1;
     }
 
-    /* Light interaction */
-    .hero-box::before{
-      content: "";
-      position: absolute;
-      inset: -1px;
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
       background: radial-gradient(
-        420px 220px at var(--x, 50%) var(--y, 50%),
-        rgba(255,255,255,0.18),
+        520px 260px at var(--x, 50%) var(--y, 50%),
+        var(--glow),
         transparent 60%
       );
       opacity: 0;
-      transition: opacity 0.25s ease;
-      pointer-events: none;
+      transition: opacity .25s ease;
+      pointer-events:none;
+      mix-blend-mode: screen;
+    }
+    .card:hover::before{ opacity: 1; }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.10'/%3E%3C/svg%3E");
+      opacity:.16;
+      mix-blend-mode: overlay;
+      pointer-events:none;
     }
 
-    .hero-box:hover::before{
-      opacity: 1;
+    .section{
+      padding: clamp(18px, 3.5vw, 30px);
+      position: relative;
+    }
+
+    .kicker{
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted2);
+      margin-bottom: 10px;
     }
 
     h1{
       margin: 0;
-      font-size: clamp(44px, 8vw, 72px);
-      font-weight: 600;
-      letter-spacing: -0.02em;
+      font-size: clamp(44px, 7.8vw, 78px);
+      font-weight: 650;
+      letter-spacing: -0.03em;
+      line-height: 1.03;
     }
 
-    p{
+    .subtitle{
+      margin-top: 14px;
+      font-size: clamp(15px, 3.4vw, 18px);
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    .divider{
+      height:1px;
+      background: rgba(255,255,255,.10);
+      margin: 18px 0;
+    }
+
+    /* ====== Hero ====== */
+    .hero{
+      margin-top: 18px;
+    }
+
+    .hero-inner{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 18px;
+    }
+    .chip{
+      font-size: 12px;
+      color: rgba(255,255,255,.78);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    /* ====== Grid Sections ====== */
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
       margin-top: 16px;
-      font-size: clamp(15px, 3.5vw, 18px);
-      line-height: 1.7;
-      color: rgba(255,255,255,0.7);
+    }
+    @media (min-width: 900px){
+      .grid-2{ grid-template-columns: 1fr 1fr; }
     }
 
-    @media (max-width: 480px){
-      .hero-box{
-        padding: 36px 24px;
-      }
+    /* ====== Skills ====== */
+    .skills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top: 8px;
+    }
+
+    /* ====== Projects ====== */
+    .projects{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-top: 10px;
+    }
+    @media (min-width: 820px){
+      .projects{ grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .proj{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding: 16px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      position: relative;
+      overflow:hidden;
+    }
+    .proj::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background: radial-gradient(380px 200px at var(--px,50%) var(--py,50%), var(--glow2), transparent 62%);
+      opacity:0;
+      transition: opacity .22s ease;
+      pointer-events:none;
+      mix-blend-mode: screen;
+    }
+    .proj:hover::before{ opacity:1; }
+    .proj:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.045);
+      border-color: rgba(255,255,255,.16);
+    }
+    .proj h3{
+      margin:0 0 6px;
+      font-size: 15px;
+      letter-spacing: .01em;
+    }
+    .proj p{
+      margin:0;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+    .tag{
+      font-size: 11px;
+      color: rgba(255,255,255,.74);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 6px 9px;
+      border-radius: 999px;
+    }
+
+    /* ====== Experience ====== */
+    .timeline{
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .item{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+    .item .top{
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+      align-items:baseline;
+    }
+    .item .role{
+      font-weight: 650;
+      letter-spacing: .01em;
+    }
+    .item .date{
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+    }
+    .item .desc{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.65;
+    }
+
+    /* ====== Contact ====== */
+    .contact-row{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (min-width: 820px){
+      .contact-row{ grid-template-columns: 1fr 1fr; }
+    }
+    .linkbox{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius: 16px;
+      padding: 14px 16px;
+      color: rgba(255,255,255,.85);
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      align-items:center;
+      transition: background .18s ease, border-color .18s ease, transform .18s ease;
+      text-decoration:none;
+    }
+    .linkbox:hover{
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.16);
+      transform: translateY(-1px);
+    }
+    .small{
+      font-size: 12px;
+      color: rgba(255,255,255,.60);
+    }
+
+    /* ====== Footer ====== */
+    .footer{
+      margin-top: 18px;
+      text-align:center;
+      color: rgba(255,255,255,.50);
+      font-size: 12px;
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior: auto; }
+      .card, .proj, .linkbox{ transition:none !important; }
+      .card::before, .proj::before{ display:none; }
     }
   </style>
 </head>
 
 <body>
+  <div class="bg-glows"></div>
 
-  <div class="hero-box" id="hero">
-    <h1>Mohammad AlShatti</h1>
-    <p>
-      Educational Technology, Artificial Intelligence & Digital Design Specialist.<br>
-      Designing smart educational systems with clarity and purpose.
-    </p>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <div class="brand-title">Mohammad AlShatti</div>
+      </div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
   </div>
 
+  <main class="wrap">
+
+    <!-- HERO -->
+    <section class="card hero glow-track" id="top">
+      <div class="section">
+        <div class="kicker">Portfolio</div>
+        <h1>Mohammad AlShatti</h1>
+        <p class="subtitle">
+          Educational Technology, Artificial Intelligence & Digital Design Specialist.<br>
+          Designing smart educational systems with clarity and purpose.
+        </p>
+
+        <div class="chips">
+          <span class="chip">EdTech Systems</span>
+          <span class="chip">AI Tools</span>
+          <span class="chip">Automation</span>
+          <span class="chip">Digital Design</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT + SKILLS -->
+    <section class="grid-2">
+      <section class="card glow-track" id="about">
+        <div class="section">
+          <div class="kicker">About</div>
+          <p class="subtitle" style="margin-top:0">
+            I build practical, scalable educational solutions — from AI-powered tools and automation systems
+            to structured digital experiences that make learning clearer and more effective.
+          </p>
+        </div>
+      </section>
+
+      <section class="card glow-track" id="skills">
+        <div class="section">
+          <div class="kicker">Skills</div>
+
+          <div class="skills">
+            <span class="chip">AI in Education</span>
+            <span class="chip">Academic Automation</span>
+            <span class="chip">Assessment Systems</span>
+            <span class="chip">Digital Transformation</span>
+            <span class="chip">UI/UX Structure</span>
+            <span class="chip">Content & Visual Design</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="small">Tip: Replace skills with your real tools (e.g., Python, Power Automate, Excel, Velo, etc.).</div>
+        </div>
+      </section>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="card glow-track" id="projects" style="margin-top:16px">
+      <div class="section">
+        <div class="kicker">Projects</div>
+
+        <div class="projects" id="projGrid">
+          <article class="proj glow-card">
+            <h3>Smart Educational Evaluator</h3>
+            <p>AI-driven evaluation system for student work with structured scoring and reporting.</p>
+            <div class="tags">
+              <span class="tag">AI</span><span class="tag">Rubrics</span><span class="tag">Education</span>
+            </div>
+          </article>
+
+          <article class="proj glow-card">
+            <h3>Academic Automation System</h3>
+            <p>Automated workflows for templates, documentation, and academic reporting.</p>
+            <div class="tags">
+              <span class="tag">Automation</span><span class="tag">Docs</span><span class="tag">Ops</span>
+            </div>
+          </article>
+
+          <article class="proj glow-card">
+            <h3>Design Systems for Education</h3>
+            <p>Clean, premium layouts for educational content, profiles, and digital assets.</p>
+            <div class="tags">
+              <span class="tag">Design</span><span class="tag">Layout</span><span class="tag">Brand</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="divider"></div>
+        <div class="small">Replace these 3 projects with your real titles + one sentence + 3 tags.</div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="card glow-track" id="experience" style="margin-top:16px">
+      <div class="section">
+        <div class="kicker">Experience</div>
+
+        <div class="timeline">
+          <div class="item">
+            <div class="top">
+              <div class="role">Educational Technology & ICT Specialist</div>
+              <div class="date">Kuwait • 10+ Years</div>
+            </div>
+            <div class="desc">
+              Building digital academic systems, automating workflows, and designing learning experiences that support clarity, scale, and impact.
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="top">
+              <div class="role">AI-Driven Educational Tools</div>
+              <div class="date">Projects • Ongoing</div>
+            </div>
+            <div class="desc">
+              Designing AI-based evaluation models, smart rubrics, and structured tools to improve performance measurement and learning outcomes.
+            </div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <div class="small">You can convert this into a real timeline with years + institutions later.</div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="card glow-track" id="contact" style="margin-top:16px">
+      <div class="section">
+        <div class="kicker">Contact</div>
+
+        <div class="contact-row">
+          <a class="linkbox" href="mailto:your@email.com">
+            <span>Email</span>
+            <span class="small">your@email.com</span>
+          </a>
+
+          <a class="linkbox" href="#" target="_blank" rel="noopener">
+            <span>LinkedIn</span>
+            <span class="small">Add your profile link</span>
+          </a>
+        </div>
+
+        <div class="divider"></div>
+        <div class="small">Replace links with your real email + LinkedIn URL.</div>
+      </div>
+    </section>
+
+    <div class="footer">© 2026 Mohammad AlShatti</div>
+  </main>
+
   <script>
-    const hero = document.getElementById("hero");
+    // Light interaction for all cards (hero + sections)
+    (function(){
+      const cards = document.querySelectorAll(".glow-track");
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduced) return;
 
-    hero.addEventListener("mousemove", (e) => {
-      const rect = hero.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      hero.style.setProperty("--x", x + "px");
-      hero.style.setProperty("--y", y + "px");
-    });
+      function setGlow(el, x, y){
+        el.style.setProperty("--x", x + "px");
+        el.style.setProperty("--y", y + "px");
+      }
+
+      cards.forEach(card => {
+        card.addEventListener("mousemove", (e) => {
+          const r = card.getBoundingClientRect();
+          setGlow(card, e.clientX - r.left, e.clientY - r.top);
+        });
+      });
+
+      // Extra glow inside project cards
+      const projCards = document.querySelectorAll(".glow-card");
+      projCards.forEach(p => {
+        p.addEventListener("mousemove", (e) => {
+          const r = p.getBoundingClientRect();
+          p.style.setProperty("--px", (e.clientX - r.left) + "px");
+          p.style.setProperty("--py", (e.clientY - r.top) + "px");
+        });
+      });
+    })();
   </script>
-
 </body>
 </html>

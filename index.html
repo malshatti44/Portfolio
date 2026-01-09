@@ -8,7 +8,6 @@
 
   <style>
     :root{
-      /* Core */
       --bg0:#070A14;
       --bg1:#081126;
       --surface: rgba(255,255,255,.06);
@@ -19,7 +18,6 @@
       --muted: rgba(255,255,255,.68);
       --muted2: rgba(255,255,255,.52);
 
-      /* Accents (teal + purple) */
       --a1:#18E1C3;
       --a2:#5B7CFF;
       --a3:#B84CFF;
@@ -32,13 +30,10 @@
       --max: 1140px;
 
       --navH: 68px;
-
-      /* Motion */
       --ease: cubic-bezier(.2,.8,.2,1);
       --t: 420ms;
     }
 
-    /* Optional light theme */
     [data-theme="light"]{
       --bg0:#F7F8FB;
       --bg1:#EEF2FA;
@@ -69,9 +64,7 @@
       text-rendering: optimizeLegibility;
     }
     a{ color:inherit; text-decoration:none; }
-    img{ max-width:100%; display:block; }
 
-    /* ===== Layout ===== */
     .container{
       width: min(100%, var(--max));
       margin: 0 auto;
@@ -85,10 +78,7 @@
       z-index: 50;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      background: linear-gradient(180deg,
-        rgba(120,120,120,.30),
-        rgba(120,120,120,.22)
-      );
+      background: linear-gradient(180deg, rgba(120,120,120,.30), rgba(120,120,120,.22));
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
     [data-theme="light"] .nav-wrap{
@@ -119,6 +109,7 @@
       color:transparent;
       font-weight: 850;
     }
+
     .nav-links{
       display:flex;
       align-items:center;
@@ -131,19 +122,14 @@
       color: rgba(255,255,255,.80);
       padding: 10px 10px;
       border-radius: 999px;
-      position: relative;
       transition: background 220ms var(--ease), color 220ms var(--ease);
       outline:none;
     }
-    [data-theme="light"] .nav-links a{
-      color: rgba(0,0,0,.72);
-    }
-    .nav-links a:hover{
-      background: rgba(255,255,255,.10);
-    }
-    [data-theme="light"] .nav-links a:hover{
-      background: rgba(0,0,0,.06);
-    }
+    [data-theme="light"] .nav-links a{ color: rgba(0,0,0,.72); }
+
+    .nav-links a:hover{ background: rgba(255,255,255,.10); }
+    [data-theme="light"] .nav-links a:hover{ background: rgba(0,0,0,.06); }
+
     .nav-links a.active{
       color: rgba(255,255,255,.96);
       background: rgba(255,255,255,.12);
@@ -155,11 +141,7 @@
       box-shadow: none;
     }
 
-    .nav-actions{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-    }
+    .nav-actions{ display:flex; align-items:center; gap: 10px; }
     .icon-btn{
       width: 42px;
       height: 42px;
@@ -178,11 +160,7 @@
       box-shadow: none;
     }
     .icon-btn:hover{ transform: translateY(-1px) scale(1.02); }
-    .icon{
-      width: 18px;
-      height: 18px;
-      opacity: .92;
-    }
+    .icon{ width: 18px; height: 18px; opacity: .92; }
 
     /* ===== Hero ===== */
     .hero{
@@ -206,8 +184,6 @@
         radial-gradient(700px 420px at 85% 65%, rgba(255,76,184,.14), transparent 60%),
         linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.40));
     }
-
-    /* animated lens-like glows */
     .hero::before{
       content:"";
       position:absolute;
@@ -220,7 +196,6 @@
       transition: opacity 240ms var(--ease);
       mix-blend-mode: screen;
     }
-
     .hero-inner{
       padding: 80px 22px 70px;
       text-align:center;
@@ -232,9 +207,8 @@
       text-transform: uppercase;
       font-size: 12px;
     }
-    [data-theme="light"] .hero-kicker{
-      color: rgba(0,0,0,.55);
-    }
+    [data-theme="light"] .hero-kicker{ color: rgba(0,0,0,.55); }
+
     .hero h1{
       margin: 12px 0 10px;
       font-size: clamp(44px, 6.8vw, 76px);
@@ -253,9 +227,7 @@
       max-width: 70ch;
       line-height: 1.65;
     }
-    [data-theme="light"] .hero-sub{
-      color: rgba(0,0,0,.60);
-    }
+    [data-theme="light"] .hero-sub{ color: rgba(0,0,0,.60); }
 
     .hero-actions{
       display:flex;
@@ -276,7 +248,6 @@
       align-items:center;
       gap: 10px;
       box-shadow: var(--shadow2);
-      transform: translateZ(0);
       transition: transform 240ms var(--ease), background 240ms var(--ease), border-color 240ms var(--ease);
       cursor:pointer;
     }
@@ -293,17 +264,6 @@
       color: #071018;
       font-weight: 800;
     }
-    [data-theme="light"] .btn.primary{
-      color:#071018;
-    }
-
-    .hero-foot{
-      margin-top: 44px;
-      color: rgba(255,255,255,.55);
-      font-size: 12px;
-      letter-spacing: .02em;
-    }
-    [data-theme="light"] .hero-foot{ color: rgba(0,0,0,.45); }
 
     /* ===== Section common ===== */
     section.block{
@@ -341,10 +301,7 @@
       line-height: 1.7;
       font-size: 14.5px;
     }
-
-    .content{
-      padding: 22px;
-    }
+    .content{ padding: 22px; }
 
     /* ===== About ===== */
     .about-grid{
@@ -352,44 +309,15 @@
       grid-template-columns: 1fr;
       gap: 18px;
       align-items:center;
+      justify-items:center;
+      text-align:center;
+      padding: 6px 0;
     }
-    @media (min-width: 920px){
-      .about-grid{ grid-template-columns: 380px 1fr; }
+    .about-text{
+      max-width: 860px;
     }
-
-    .avatar-wrap{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding: 10px 0 14px;
-    }
-    .avatar{
-      width: 240px;
-      height: 240px;
-      border-radius: 999px;
-      position:relative;
-      box-shadow: 0 20px 60px rgba(0,0,0,.50);
-      border: 4px solid rgba(24,225,195,.35);
-      background:
-        radial-gradient(160px 160px at 30% 20%, rgba(255,255,255,.18), transparent 65%),
-        linear-gradient(135deg, rgba(91,124,255,.25), rgba(184,76,255,.18)),
-        url("https://images.unsplash.com/photo-1520975916090-3105956dac38?auto=format&fit=crop&w=800&q=80");
-      background-size: cover;
-      background-position: center;
-      overflow:hidden;
-    }
-    .avatar::after{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background: radial-gradient(220px 180px at var(--ax,50%) var(--ay,50%), rgba(255,255,255,.12), transparent 62%);
-      opacity: .85;
-      pointer-events:none;
-      mix-blend-mode: screen;
-    }
-
     .about-text h3{
-      margin:0 0 8px;
+      margin:0 0 10px;
       font-size: 22px;
       letter-spacing: -0.01em;
     }
@@ -407,15 +335,16 @@
     }
 
     .info-cards{
-      margin-top: 14px;
+      margin-top: 16px;
       display:grid;
       grid-template-columns: 1fr;
       gap: 12px;
+      max-width: 920px;
+      width: 100%;
     }
-    @media (min-width: 720px){
+    @media (min-width: 860px){
       .info-cards{ grid-template-columns: 1fr 1fr; }
     }
-
     .info{
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.10);
@@ -440,40 +369,19 @@
       background: linear-gradient(135deg, rgba(24,225,195,.25), rgba(184,76,255,.20));
       border: 1px solid rgba(255,255,255,.14);
     }
-    [data-theme="light"] .dot{
-      border: 1px solid rgba(0,0,0,.10);
-    }
-    .info strong{
-      display:block;
-      font-size: 13px;
-      letter-spacing: .01em;
-      margin-bottom: 2px;
-    }
-    .info span{
-      display:block;
-      color: var(--muted);
-      font-size: 13px;
-    }
+    [data-theme="light"] .dot{ border: 1px solid rgba(0,0,0,.10); }
 
-    .about-actions{
-      margin-top: 16px;
-      display:flex;
-      gap: 12px;
-      flex-wrap:wrap;
-    }
+    .info strong{ display:block; font-size: 13px; margin-bottom: 2px; }
+    .info span{ display:block; color: var(--muted); font-size: 13px; }
 
-    /* ===== Projects ===== */
+    /* ===== Cards grid ===== */
     .cards-grid{
       display:grid;
       grid-template-columns: 1fr;
       gap: 14px;
     }
-    @media (min-width: 900px){
-      .cards-grid{ grid-template-columns: repeat(4, 1fr); }
-    }
-    @media (min-width: 720px) and (max-width: 899px){
-      .cards-grid{ grid-template-columns: repeat(2, 1fr); }
-    }
+    @media (min-width: 900px){ .cards-grid{ grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 720px) and (max-width: 899px){ .cards-grid{ grid-template-columns: repeat(2, 1fr); } }
 
     .card{
       border-radius: 18px;
@@ -482,7 +390,6 @@
       box-shadow: var(--shadow2);
       overflow:hidden;
       position:relative;
-      transform: translateZ(0);
       transition: transform 260ms var(--ease), border-color 260ms var(--ease), background 260ms var(--ease);
     }
     [data-theme="light"] .card{
@@ -499,6 +406,7 @@
       border-color: rgba(0,0,0,.14);
       background: rgba(255,255,255,.92);
     }
+
     .thumb{
       height: 150px;
       background:
@@ -512,7 +420,7 @@
       top: 12px;
       right: 12px;
       font-size: 11px;
-      font-weight: 750;
+      font-weight: 850;
       padding: 7px 10px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.16);
@@ -527,9 +435,7 @@
       border: 1px solid rgba(0,0,0,.10);
     }
 
-    .card-body{
-      padding: 16px;
-    }
+    .card-body{ padding: 16px; }
     .card h4{
       margin:0 0 8px;
       font-size: 15px;
@@ -540,7 +446,7 @@
       color: var(--muted);
       font-size: 13.5px;
       line-height: 1.65;
-      min-height: 62px;
+      min-height: 74px;
     }
     .tags{
       display:flex;
@@ -561,6 +467,7 @@
       background: rgba(0,0,0,.03);
       color: rgba(0,0,0,.72);
     }
+
     .card-actions{
       display:flex;
       gap: 10px;
@@ -573,7 +480,7 @@
       background: rgba(255,255,255,.06);
       padding: 10px 12px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       text-align:center;
       transition: transform 240ms var(--ease), background 240ms var(--ease);
       cursor:pointer;
@@ -592,9 +499,7 @@
       gap: 14px;
       margin-top: 6px;
     }
-    @media (min-width: 720px){
-      .skills-grid{ grid-template-columns: repeat(4, 1fr); }
-    }
+    @media (min-width: 720px){ .skills-grid{ grid-template-columns: repeat(4, 1fr); } }
     .skill{
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,.10);
@@ -611,6 +516,7 @@
     }
     .skill:hover{ transform: translateY(-4px); background: rgba(255,255,255,.05); }
     [data-theme="light"] .skill:hover{ background: rgba(255,255,255,.92); }
+
     .skill .ico{
       width: 46px; height: 46px;
       margin: 0 auto 10px;
@@ -619,15 +525,12 @@
       place-items:center;
       border: 1px solid rgba(255,255,255,.14);
       background: linear-gradient(135deg, rgba(24,225,195,.18), rgba(184,76,255,.14));
+      font-weight: 950;
+      letter-spacing: .02em;
     }
-    [data-theme="light"] .skill .ico{
-      border: 1px solid rgba(0,0,0,.10);
-    }
-    .skill b{
-      display:block;
-      font-size: 13px;
-      margin-bottom: 6px;
-    }
+    [data-theme="light"] .skill .ico{ border: 1px solid rgba(0,0,0,.10); }
+
+    .skill b{ display:block; font-size: 13px; margin-bottom: 6px; }
     .skill .bar{
       height: 4px;
       border-radius: 999px;
@@ -649,15 +552,15 @@
       grid-template-columns: 1fr;
       gap: 14px;
     }
-    @media (min-width: 920px){
-      .cert-grid{ grid-template-columns: repeat(4, 1fr); }
-    }
-    @media (min-width: 720px) and (max-width: 919px){
-      .cert-grid{ grid-template-columns: repeat(2, 1fr); }
-    }
+    @media (min-width: 920px){ .cert-grid{ grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 720px) and (max-width: 919px){ .cert-grid{ grid-template-columns: repeat(2, 1fr); } }
+
     .cert-thumb{
-      height: 140px;
-      background: linear-gradient(135deg, rgba(24,225,195,.65), rgba(24,225,195,.20));
+      height: 160px;
+      background:
+        radial-gradient(320px 200px at 20% 20%, rgba(24,225,195,.32), transparent 62%),
+        radial-gradient(320px 200px at 80% 30%, rgba(184,76,255,.24), transparent 62%),
+        linear-gradient(135deg, rgba(91,124,255,.18), rgba(255,76,184,.10));
       display:flex;
       align-items:center;
       justify-content:center;
@@ -668,7 +571,7 @@
       top: 10px;
       left: 10px;
       font-size: 11px;
-      font-weight: 850;
+      font-weight: 900;
       padding: 6px 10px;
       border-radius: 999px;
       background: rgba(255,255,255,.18);
@@ -680,85 +583,13 @@
       border: 1px solid rgba(0,0,0,.10);
       color: rgba(0,0,0,.72);
     }
-    .cert-thumb span{
-      font-weight: 900;
-      letter-spacing: .04em;
-      color: rgba(255,255,255,.90);
-    }
-    [data-theme="light"] .cert-thumb span{ color: rgba(0,0,0,.72); }
-
-    /* ===== Testimonials + Stats ===== */
-    .test-grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-    @media (min-width: 920px){
-      .test-grid{ grid-template-columns: repeat(3, 1fr); }
-    }
-    .test{
-      padding: 16px;
-    }
-    .stars{
-      display:flex;
-      gap: 4px;
-      align-items:center;
-      color: #FFC94A;
-      font-weight: 850;
-      margin-bottom: 10px;
-      font-size: 12px;
-    }
-    .quote{
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 13.5px;
-      min-height: 78px;
-    }
-    .who{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      margin-top: 12px;
-    }
-    .pfp{
-      width: 42px; height: 42px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(91,124,255,.35), rgba(184,76,255,.25));
-      border: 1px solid rgba(255,255,255,.14);
-    }
-    [data-theme="light"] .pfp{
-      border: 1px solid rgba(0,0,0,.10);
-    }
-    .who b{ display:block; font-size: 13px; }
-    .who span{ display:block; font-size: 12px; color: var(--muted2); }
-
-    .stats{
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-top: 16px;
-    }
-    @media (min-width: 920px){
-      .stats{ grid-template-columns: repeat(4, 1fr); }
-    }
-    .stat{
-      padding: 18px 16px;
-      text-align:center;
-    }
-    .stat .num{
-      font-size: 28px;
+    .cert-thumb .ph{
       font-weight: 950;
-      letter-spacing: -0.02em;
-      background: linear-gradient(90deg, var(--a1), var(--a3));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
+      letter-spacing: .05em;
+      color: rgba(255,255,255,.88);
+      opacity: .9;
     }
-    .stat .lbl{
-      margin-top: 6px;
-      font-size: 12px;
-      color: var(--muted2);
-    }
+    [data-theme="light"] .cert-thumb .ph{ color: rgba(0,0,0,.70); }
 
     /* ===== Contact ===== */
     .contact-grid{
@@ -767,12 +598,7 @@
       gap: 14px;
       align-items:stretch;
     }
-    @media (min-width: 980px){
-      .contact-grid{ grid-template-columns: 1.05fr 1.25fr; }
-    }
-    .contact-list .info{
-      margin-bottom: 12px;
-    }
+    @media (min-width: 980px){ .contact-grid{ grid-template-columns: 1.05fr 1.25fr; } }
 
     .form{
       border-radius: 18px;
@@ -816,10 +642,6 @@
       border-color: rgba(24,225,195,.45);
       background: rgba(255,255,255,.06);
     }
-    [data-theme="light"] .field:focus{
-      border-color: rgba(91,124,255,.35);
-      background: rgba(0,0,0,.04);
-    }
     textarea.field{ min-height: 120px; resize: vertical; }
 
     .send{
@@ -829,7 +651,7 @@
       padding: 12px 14px;
       border: 0;
       cursor:pointer;
-      font-weight: 900;
+      font-weight: 950;
       letter-spacing: .02em;
       background: linear-gradient(90deg, rgba(24,225,195,.95), rgba(91,124,255,.95), rgba(255,76,184,.95));
       color: #071018;
@@ -850,11 +672,7 @@
       gap: 12px;
       flex-wrap:wrap;
     }
-    .social{
-      display:flex;
-      gap: 10px;
-      align-items:center;
-    }
+    .social{ display:flex; gap: 10px; align-items:center; }
     .soc{
       width: 42px; height: 42px;
       border-radius: 999px;
@@ -870,18 +688,14 @@
     }
     .soc:hover{ transform: translateY(-2px); }
 
-    /* ===== Scroll reveal animations ===== */
+    /* ===== Animations ===== */
     .reveal{
       opacity: 0;
       transform: translateY(18px);
       transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
     }
-    .reveal.in{
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.in{ opacity: 1; transform: translateY(0); }
 
-    /* ===== Page transition feel on nav click ===== */
     .flash{
       position: fixed;
       inset: 0;
@@ -894,20 +708,9 @@
     }
     .flash.on{ opacity: 1; }
 
-    /* ===== Mobile nav wrap ===== */
-    @media (max-width: 860px){
-      .nav-links{
-        display:none;
-      }
-      .menu{
-        display:inline-flex;
-      }
-    }
-    @media (min-width: 861px){
-      .menu{ display:none; }
-    }
+    @media (max-width: 860px){ .nav-links{ display:none; } .menu{ display:inline-flex; } }
+    @media (min-width: 861px){ .menu{ display:none; } }
 
-    /* Simple drawer */
     .drawer{
       position: fixed;
       top: calc(var(--navH) + 10px);
@@ -967,20 +770,17 @@
           <a href="#projects" class="navlink">Projects</a>
           <a href="#skills" class="navlink">Skills</a>
           <a href="#certificates" class="navlink">Certificates</a>
-          <a href="#testimonials" class="navlink">Testimonials</a>
           <a href="#contact" class="navlink">Contact</a>
         </nav>
 
         <div class="nav-actions">
           <button class="icon-btn menu" id="menuBtn" aria-label="Open menu">
-            <!-- menu icon -->
             <svg class="icon" viewBox="0 0 24 24" fill="none">
               <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </button>
 
           <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">
-            <!-- moon icon -->
             <svg class="icon" viewBox="0 0 24 24" fill="none">
               <path d="M21 14.5A7.5 7.5 0 0 1 9.5 3 6.7 6.7 0 1 0 21 14.5Z"
                     stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
@@ -997,7 +797,6 @@
       <a href="#projects" class="drawerlink">Projects</a>
       <a href="#skills" class="drawerlink">Skills</a>
       <a href="#certificates" class="drawerlink">Certificates</a>
-      <a href="#testimonials" class="drawerlink">Testimonials</a>
       <a href="#contact" class="drawerlink">Contact</a>
     </div>
   </div>
@@ -1010,7 +809,7 @@
         <h1>Mohammad AlShatti</h1>
         <p class="hero-sub">
           Educational Technology, Artificial Intelligence & Digital Design Specialist.<br />
-          I build premium educational systems, AI tools, and clean digital experiences.
+          I build smart education systems, AI-driven tools, and premium digital experiences.
         </p>
 
         <div class="hero-actions">
@@ -1024,31 +823,29 @@
           </a>
         </div>
 
-        <div class="hero-foot">@mohammad_alshatti • Kuwait</div>
+        <div class="hero-sub" style="margin-top:18px; font-size:13px; opacity:.75;">
+          Kuwait • info@malshatti.org
+        </div>
       </div>
     </header>
 
-    <!-- ABOUT -->
+    <!-- ABOUT (no image, no email) -->
     <section class="block reveal" id="about">
       <div class="head">
         <h2 class="title">About Me</h2>
         <p class="subtitle">
-          A focused portfolio for Education Technology, AI-driven systems, and digital design — built with clarity and impact.
+          I combine educational systems, AI workflows, and design to deliver clear, professional solutions.
         </p>
       </div>
 
       <div class="content">
         <div class="about-grid">
-          <div class="avatar-wrap">
-            <!-- Replace avatar background in CSS .avatar -->
-            <div class="avatar" id="avatar"></div>
-          </div>
-
           <div class="about-text">
-            <h3>I'm <b>Mohammad AlShatti</b>, a Specialist in EdTech, AI & Design</h3>
+            <h3>I'm <b>Mohammad AlShatti</b></h3>
             <p>
-              I specialize in building structured educational solutions that live on the web — from automation systems and AI evaluation tools
-              to clean UI/UX layouts and digital content. I like turning complex requirements into simple, premium experiences.
+              I specialize in building practical educational technology solutions—automation systems for schools,
+              AI-assisted evaluation tools, and clean UI/UX design for digital content. My work focuses on clarity,
+              reliability, and premium presentation.
             </p>
 
             <div class="info-cards">
@@ -1068,13 +865,25 @@
               <div class="info">
                 <div class="dot">
                   <svg class="icon" viewBox="0 0 24 24" fill="none">
-                    <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2"/>
-                    <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                   </svg>
                 </div>
                 <div>
-                  <strong>Email</strong>
-                  <span>your@email.com</span>
+                  <strong>Focus</strong>
+                  <span>EdTech • AI • Design</span>
+                </div>
+              </div>
+
+              <div class="info">
+                <div class="dot">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 12a8 8 0 1 0 16 0" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 4v8l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Experience Style</strong>
+                  <span>Structured • Reliable • Premium</span>
                 </div>
               </div>
 
@@ -1086,298 +895,205 @@
                   </svg>
                 </div>
                 <div>
-                  <strong>Focus</strong>
-                  <span>AI tools • Automation • UI/UX</span>
-                </div>
-              </div>
-
-              <div class="info">
-                <div class="dot">
-                  <svg class="icon" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <strong>Availability</strong>
-                  <span>Freelance / Projects</span>
+                  <strong>Work Type</strong>
+                  <span>Systems • Tools • Branding</span>
                 </div>
               </div>
             </div>
 
-            <div class="about-actions">
-              <a class="btn primary" href="#" onclick="alert('Attach your CV link here')">
-                <span>Download CV</span><span style="opacity:.8;">↓</span>
-              </a>
-              <a class="btn" href="#contact">
-                <span>Hire Me</span><span style="opacity:.8;">⚡</span>
-              </a>
+            <div style="margin-top:14px; color:var(--muted2); font-size:12px;">
+              *Email is available in the Contact section.
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS -->
+    <!-- PROJECTS (prioritized + merged into strong set) -->
     <section class="block reveal" id="projects">
       <div class="head">
         <h2 class="title">My Projects</h2>
-        <p class="subtitle">Cards with thumbnails, tags, and quick actions — exactly like the reference, but cleaner.</p>
+        <p class="subtitle">Selected work that best represents my value: education systems, AI tooling, and design.</p>
       </div>
 
       <div class="content">
         <div class="cards-grid">
+          <!-- #1: Autograder -->
           <article class="card">
             <div class="thumb">
-              <span class="badge">New</span>
+              <span class="badge">EdTech + AI</span>
             </div>
             <div class="card-body">
-              <h4>AI Chatbot (Education Support)</h4>
-              <p>AI-powered assistant for academic workflows, student support, and structured responses.</p>
+              <h4>Practical Exams Auto-Grader (Python)</h4>
+              <p>
+                A grading tool built with Python to evaluate computer practical exams across
+                HTML, Scratch 3, Open Roberta Lab, and Python—faster scoring with consistent rubrics.
+              </p>
               <div class="tags">
-                <span class="tag">AI</span><span class="tag">NLP</span><span class="tag">UI</span>
+                <span class="tag">Python</span><span class="tag">AI-Edu</span><span class="tag">Automation</span><span class="tag">Assessment</span>
               </div>
               <div class="card-actions">
-                <a class="pill primary" href="#">Demo</a>
-                <a class="pill" href="#">Code</a>
+                <a class="pill primary" href="#">Case Study</a>
+                <a class="pill" href="#">Demo</a>
               </div>
             </div>
           </article>
 
+          <!-- #2: School Records System -->
           <article class="card">
             <div class="thumb">
-              <span class="badge">Website</span>
+              <span class="badge">System</span>
             </div>
             <div class="card-body">
-              <h4>Curriculum System (OBE)</h4>
-              <p>Outcome-based education platform with dashboards, mapping, and reporting.</p>
+              <h4>School Records Management System</h4>
+              <p>
+                A structured school records solution for department heads and teachers using Microsoft Office tools
+                with SQL-based data organization—reports, tracking, and workflows.
+              </p>
               <div class="tags">
-                <span class="tag">Web</span><span class="tag">Automation</span><span class="tag">Reports</span>
+                <span class="tag">Microsoft Office</span><span class="tag">SQL</span><span class="tag">Automation</span><span class="tag">Dashboards</span>
               </div>
               <div class="card-actions">
-                <a class="pill primary" href="#">Demo</a>
-                <a class="pill" href="#">Code</a>
+                <a class="pill primary" href="#">Case Study</a>
+                <a class="pill" href="#">Screens</a>
               </div>
             </div>
           </article>
 
+          <!-- #3: Branding Coffee -->
           <article class="card">
             <div class="thumb">
-              <span class="badge">Network</span>
+              <span class="badge">Branding</span>
             </div>
             <div class="card-body">
-              <h4>Large-Scale Network Design</h4>
-              <p>Network planning models and simulation-ready design for scalability and security.</p>
+              <h4>Full Visual Identity — Coffee Project</h4>
+              <p>
+                Complete brand identity design: logo system, colors, typography, packaging direction,
+                and social templates—built for a modern premium look.
+              </p>
               <div class="tags">
-                <span class="tag">Cisco</span><span class="tag">VLAN</span><span class="tag">Routing</span>
+                <span class="tag">Design</span><span class="tag">Brand Identity</span><span class="tag">Social</span><span class="tag">Packaging</span>
               </div>
               <div class="card-actions">
-                <a class="pill primary" href="#">Demo</a>
-                <a class="pill" href="#">File</a>
+                <a class="pill primary" href="#">Showcase</a>
+                <a class="pill" href="#">Mockups</a>
               </div>
             </div>
           </article>
 
+          <!-- #4: Apparel + Ads merged -->
           <article class="card">
             <div class="thumb">
-              <span class="badge">Game</span>
+              <span class="badge">Design</span>
             </div>
             <div class="card-body">
-              <h4>Interactive Learning Game</h4>
-              <p>Gamified learning experience with modern UI and responsive layout.</p>
+              <h4>Apparel Design & Commercial Ads</h4>
+              <p>
+                T-shirt & hoodie designs, product mockups using clothing models for e-commerce,
+                plus ad creatives for different companies—optimized for conversion and clarity.
+              </p>
               <div class="tags">
-                <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span>
+                <span class="tag">T-Shirts</span><span class="tag">Hoodies</span><span class="tag">Mockups</span><span class="tag">Ads</span>
               </div>
               <div class="card-actions">
-                <a class="pill primary" href="#">Demo</a>
-                <a class="pill" href="#">Code</a>
+                <a class="pill primary" href="#">Portfolio</a>
+                <a class="pill" href="#">Ads</a>
               </div>
             </div>
           </article>
         </div>
+
+        <div style="margin-top:14px; color:var(--muted2); font-size:12px;">
+          *I merged similar design items to keep the portfolio strong and focused.
+        </div>
       </div>
     </section>
 
-    <!-- SKILLS -->
+    <!-- SKILLS (your list) -->
     <section class="block reveal" id="skills">
       <div class="head">
         <h2 class="title">My Skills</h2>
-        <p class="subtitle">Technical skills grid with modern cards and subtle progress lines.</p>
+        <p class="subtitle">A focused set that matches my actual portfolio direction.</p>
       </div>
 
       <div class="content">
         <div class="skills-grid">
-          <div class="skill">
-            <div class="ico">H5</div>
-            <b>HTML5</b>
-            <div class="bar"><i style="--w:92%"></i></div>
-          </div>
-          <div class="skill">
-            <div class="ico">C3</div>
-            <b>CSS / UI</b>
-            <div class="bar"><i style="--w:88%"></i></div>
-          </div>
-          <div class="skill">
-            <div class="ico">JS</div>
-            <b>JavaScript</b>
-            <div class="bar"><i style="--w:80%"></i></div>
-          </div>
-          <div class="skill">
-            <div class="ico">AI</div>
-            <b>AI in Education</b>
-            <div class="bar"><i style="--w:84%"></i></div>
-          </div>
-          <div class="skill">
-            <div class="ico">EX</div>
-            <b>Excel Systems</b>
-            <div class="bar"><i style="--w:86%"></i></div>
-          </div>
-          <div class="skill">
-            <div class="ico">UX</div>
-            <b>UX Structure</b>
-            <div class="bar"><i style="--w:82%"></i></div>
-          </div>
-          <div class="skill">
-            <div class="ico">AU</div>
-            <b>Automation</b>
-            <div class="bar"><i style="--w:85%"></i></div>
-          </div>
-          <div class="skill">
-            <div class="ico">FG</div>
-            <b>Figma / Design</b>
-            <div class="bar"><i style="--w:78%"></i></div>
-          </div>
+          <div class="skill"><div class="ico">DS</div><b>Design</b><div class="bar"><i style="--w:88%"></i></div></div>
+          <div class="skill"><div class="ico">AI</div><b>Artificial Intelligence</b><div class="bar"><i style="--w:84%"></i></div></div>
+          <div class="skill"><div class="ico">HT</div><b>HTML</b><div class="bar"><i style="--w:80%"></i></div></div>
+          <div class="skill"><div class="ico">PY</div><b>Python</b><div class="bar"><i style="--w:86%"></i></div></div>
+          <div class="skill"><div class="ico">JV</div><b>Java</b><div class="bar"><i style="--w:70%"></i></div></div>
+          <div class="skill"><div class="ico">MS</div><b>Microsoft Office</b><div class="bar"><i style="--w:90%"></i></div></div>
+          <div class="skill"><div class="ico">SQ</div><b>SQL</b><div class="bar"><i style="--w:78%"></i></div></div>
+          <div class="skill"><div class="ico">ED</div><b>AI in Education</b><div class="bar"><i style="--w:85%"></i></div></div>
         </div>
       </div>
     </section>
 
-    <!-- CERTIFICATES -->
+    <!-- CERTIFICATES (placeholders ready for your images) -->
     <section class="block reveal" id="certificates">
       <div class="head">
         <h2 class="title">Certificates & Achievements</h2>
-        <p class="subtitle">Replace placeholders with your certificate images later.</p>
+        <p class="subtitle">
+          Add your certificate images here (replace the placeholders). If you send the certificate images, I’ll insert them with titles.
+        </p>
       </div>
 
       <div class="content">
         <div class="cert-grid">
+          <!-- Replace each placeholder by setting background-image or putting <img> -->
           <article class="card">
             <div class="cert-thumb">
               <span class="year">2025</span>
-              <span>CERT</span>
+              <span class="ph">CERT 1</span>
             </div>
             <div class="card-body">
-              <h4>AI for Education</h4>
-              <p>Completed a program focused on applying AI for evaluation and learning workflows.</p>
+              <h4>Certificate Title 1</h4>
+              <p>Short description of what you completed (provider + focus).</p>
             </div>
           </article>
 
           <article class="card">
             <div class="cert-thumb">
               <span class="year">2025</span>
-              <span>CERT</span>
+              <span class="ph">CERT 2</span>
             </div>
             <div class="card-body">
-              <h4>Automation Systems</h4>
-              <p>Designed academic templates and automated reporting workflows.</p>
+              <h4>Certificate Title 2</h4>
+              <p>Short description of what you completed (provider + focus).</p>
             </div>
           </article>
 
           <article class="card">
             <div class="cert-thumb">
               <span class="year">2025</span>
-              <span>CERT</span>
+              <span class="ph">CERT 3</span>
             </div>
             <div class="card-body">
-              <h4>UI/UX & Design</h4>
-              <p>Built premium layouts for digital profiles, portfolios, and content systems.</p>
+              <h4>Certificate Title 3</h4>
+              <p>Short description of what you completed (provider + focus).</p>
             </div>
           </article>
 
           <article class="card">
             <div class="cert-thumb">
               <span class="year">2025</span>
-              <span>CERT</span>
+              <span class="ph">CERT 4</span>
             </div>
             <div class="card-body">
-              <h4>Data & Excel</h4>
-              <p>Structured dashboards and reporting pipelines for academic and admin use.</p>
+              <h4>Certificate Title 4</h4>
+              <p>Short description of what you completed (provider + focus).</p>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="block reveal" id="testimonials">
-      <div class="head">
-        <h2 class="title">What Clients Say</h2>
-        <p class="subtitle">Testimonial cards + stats like the reference.</p>
-      </div>
-
-      <div class="content">
-        <div class="test-grid">
-          <article class="card test">
-            <div class="stars">★★★★★ <span style="color:var(--muted2); font-weight:800;">5.0</span></div>
-            <div class="quote">"Professional, clear, and fast. The system structure was clean and scalable."</div>
-            <div class="who">
-              <div class="pfp"></div>
-              <div>
-                <b>Client One</b>
-                <span>Education • Kuwait</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="card test">
-            <div class="stars">★★★★★ <span style="color:var(--muted2); font-weight:800;">5.0</span></div>
-            <div class="quote">"The AI workflow and reporting automation saved us serious time. Excellent delivery."</div>
-            <div class="who">
-              <div class="pfp"></div>
-              <div>
-                <b>Client Two</b>
-                <span>Automation • Ops</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="card test">
-            <div class="stars">★★★★★ <span style="color:var(--muted2); font-weight:800;">5.0</span></div>
-            <div class="quote">"High-quality design with great attention to detail. Looks premium and modern."</div>
-            <div class="who">
-              <div class="pfp"></div>
-              <div>
-                <b>Client Three</b>
-                <span>Design • Digital</span>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <div class="stats">
-          <div class="card stat">
-            <div class="num">12</div>
-            <div class="lbl">Happy Clients</div>
-          </div>
-          <div class="card stat">
-            <div class="num">98%</div>
-            <div class="lbl">Success Rate</div>
-          </div>
-          <div class="card stat">
-            <div class="num">30+</div>
-            <div class="lbl">Projects Completed</div>
-          </div>
-          <div class="card stat">
-            <div class="num">5.0</div>
-            <div class="lbl">Average Rating</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
+    <!-- CONTACT (no phone, website replaced with LinkedIn, form sends to email) -->
     <section class="block reveal" id="contact">
       <div class="head">
         <h2 class="title">Contact</h2>
-        <p class="subtitle">Left: contact information. Right: message form like the reference.</p>
+        <p class="subtitle">Send a message directly to my email, or connect with me on LinkedIn.</p>
       </div>
 
       <div class="content">
@@ -1405,45 +1121,50 @@
               </div>
               <div>
                 <strong>Email</strong>
-                <span>your@email.com</span>
+                <span>info@malshatti.org</span>
               </div>
             </div>
 
             <div class="info">
               <div class="dot">
                 <svg class="icon" viewBox="0 0 24 24" fill="none">
-                  <path d="M6.5 3.5h.8c.7 0 1.3.5 1.4 1.2l.6 3c.1.6-.2 1.2-.7 1.5l-1.2.7a13 13 0 0 0 5.7 5.7l.7-1.2c.3-.5.9-.8 1.5-.7l3 .6c.7.1 1.2.7 1.2 1.4v.8c0 1-.8 1.8-1.8 1.8A16.8 16.8 0 0 1 4.7 5.3c0-1 .8-1.8 1.8-1.8Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M16 8a6 6 0 1 1-8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M12 2v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
               </div>
               <div>
-                <strong>Phone</strong>
-                <span>+965 XX XXX XXXX</span>
+                <strong>LinkedIn</strong>
+                <span><a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener" style="text-decoration:underline; opacity:.9;">linkedin.com/in/YOUR-LINKEDIN</a></span>
               </div>
             </div>
 
             <div class="info">
               <div class="dot">
                 <svg class="icon" viewBox="0 0 24 24" fill="none">
-                  <path d="M4 12a8 8 0 1 0 16 0" stroke="currentColor" stroke-width="2"/>
-                  <path d="M12 4v8l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M6 3h12v18H6z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M9 7h6M9 11h6M9 15h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 </svg>
               </div>
               <div>
-                <strong>Website</strong>
-                <span>yourdomain.com</span>
+                <strong>Preferred Topics</strong>
+                <span>EdTech • AI tools • Design</span>
               </div>
             </div>
           </div>
 
-          <form class="form" onsubmit="event.preventDefault(); alert('Connect this form to your email service later.');">
+          <form class="form" id="contactForm">
             <h3>Send Me a Message</h3>
             <div class="row">
-              <input class="field" type="text" placeholder="Your Name" required />
-              <input class="field" type="email" placeholder="Your Email" required />
-              <input class="field" type="text" placeholder="Subject" />
-              <textarea class="field" placeholder="Your Message" required></textarea>
+              <input class="field" id="name" type="text" placeholder="Your Name" required />
+              <input class="field" id="email" type="email" placeholder="Your Email" required />
+              <input class="field" id="subject" type="text" placeholder="Subject" required />
+              <textarea class="field" id="message" placeholder="Your Message" required></textarea>
             </div>
             <button class="send" type="submit">Send Message</button>
+
+            <div style="margin-top:10px; font-size:12px; color:var(--muted2); line-height:1.6;">
+              Note: This sends via your email app (mailto). For direct sending without opening email, I can connect Formspree/EmailJS.
+            </div>
           </form>
         </div>
 
@@ -1453,22 +1174,16 @@
           </div>
 
           <div class="social">
-            <a class="soc" href="#" aria-label="GitHub">
-              <svg class="icon" viewBox="0 0 24 24" fill="none">
-                <path d="M9 19c-4 1.2-4-2-5-2m10 4v-3a3 3 0 0 0-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.7 4.7 0 0 0-1.2-3.2 4.4 4.4 0 0 0-.1-3.2s-1-.3-3.3 1.2a11.3 11.3 0 0 0-6 0C5.8 2.8 4.8 3.1 4.8 3.1a4.4 4.4 0 0 0-.1 3.2A4.7 4.7 0 0 0 3.5 9.5c0 4.7 2.8 5.7 5.5 6A3 3 0 0 0 8.2 18v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-            <a class="soc" href="#" aria-label="LinkedIn">
+            <a class="soc" href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener" aria-label="LinkedIn">
               <svg class="icon" viewBox="0 0 24 24" fill="none">
                 <path d="M6 9v12M6 6.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 <path d="M10 21V9m0 4c.6-1.2 1.9-2 3.5-2 2.3 0 4.5 1.3 4.5 5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               </svg>
             </a>
-            <a class="soc" href="#" aria-label="Instagram">
+            <a class="soc" href="mailto:info@malshatti.org" aria-label="Email">
               <svg class="icon" viewBox="0 0 24 24" fill="none">
-                <path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M17.5 6.5h.01" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2"/>
+                <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               </svg>
             </a>
           </div>
@@ -1494,16 +1209,6 @@
     }
     hero.addEventListener("mousemove", setHeroGlow);
 
-    // ===== About avatar glow
-    const avatar = document.getElementById("avatar");
-    avatar.addEventListener("mousemove", (e) => {
-      const r = avatar.getBoundingClientRect();
-      const x = ((e.clientX - r.left) / r.width) * 100;
-      const y = ((e.clientY - r.top) / r.height) * 100;
-      avatar.style.setProperty("--ax", x.toFixed(1) + "%");
-      avatar.style.setProperty("--ay", y.toFixed(1) + "%");
-    });
-
     // ===== Smooth scroll + animated nav "flash"
     const flash = document.getElementById("flash");
     function navFlash(e){
@@ -1520,7 +1225,6 @@
       window.scrollTo({ top, behavior: "smooth" });
     }
 
-    // bind nav links
     document.querySelectorAll('a.navlink, a.drawerlink').forEach(a => {
       a.addEventListener("click", (e) => {
         const href = a.getAttribute("href");
@@ -1535,9 +1239,7 @@
 
     // ===== Scroll spy (active nav)
     const navLinks = Array.from(document.querySelectorAll(".navlink"));
-    const sections = navLinks
-      .map(a => document.querySelector(a.getAttribute("href")))
-      .filter(Boolean);
+    const sections = navLinks.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
 
     const spy = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1546,12 +1248,11 @@
           navLinks.forEach(l => l.classList.toggle("active", l.getAttribute("href") === id));
         }
       });
-    }, { root: null, threshold: 0.55 });
+    }, { threshold: 0.55 });
 
     sections.forEach(s => spy.observe(s));
 
     // ===== Reveal on scroll
-    const revealEls = document.querySelectorAll(".reveal");
     const revealObs = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if(entry.isIntersecting){
@@ -1560,9 +1261,9 @@
         }
       });
     }, { threshold: 0.12 });
-    revealEls.forEach(el => revealObs.observe(el));
+    document.querySelectorAll(".reveal").forEach(el => revealObs.observe(el));
 
-    // ===== Theme toggle (optional)
+    // ===== Theme toggle
     const themeBtn = document.getElementById("themeBtn");
     const savedTheme = localStorage.getItem("theme");
     if(savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
@@ -1584,6 +1285,30 @@
       if(!drawer.classList.contains("open")) return;
       const isInside = drawer.contains(e.target) || menuBtn.contains(e.target);
       if(!isInside) closeDrawer();
+    });
+
+    // ===== Contact form -> mailto (sends to your email via user's mail app)
+    const form = document.getElementById("contactForm");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const subject = document.getElementById("subject").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      const to = "info@malshatti.org";
+      const fullSubject = `[Portfolio] ${subject}`;
+      const body =
+`Name: ${name}
+Email: ${email}
+
+Message:
+${message}
+`;
+
+      const mailto = `mailto:${to}?subject=${encodeURIComponent(fullSubject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
     });
 
     // ===== If load with hash

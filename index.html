@@ -415,6 +415,13 @@
         linear-gradient(135deg, rgba(91,124,255,.18), rgba(255,76,184,.10));
       position:relative;
     }
+
+    /* allows image backgrounds */
+    .thumb.thumb-img{
+      background-size: cover !important;
+      background-position: center !important;
+    }
+
     .badge{
       position:absolute;
       top: 12px;
@@ -491,6 +498,10 @@
       background: linear-gradient(90deg, rgba(24,225,195,.95), rgba(91,124,255,.95));
       color: #071018;
     }
+
+    /* Make the Larom card feel clickable */
+    .card.is-link{ cursor: pointer; }
+    .card.is-link:focus{ outline: 2px solid rgba(24,225,195,.45); outline-offset: 4px; }
 
     /* ===== Skills ===== */
     .skills-grid{
@@ -829,7 +840,7 @@
       </div>
     </header>
 
-    <!-- ABOUT (no image, no email) -->
+    <!-- ABOUT -->
     <section class="block reveal" id="about">
       <div class="head">
         <h2 class="title">About Me</h2>
@@ -859,18 +870,6 @@
                 <div>
                   <strong>Location</strong>
                   <span>Kuwait</span>
-                </div>
-              </div>
-
-              <div class="info">
-                <div class="dot">
-                  <svg class="icon" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  </svg>
-                </div>
-                <div>
-                  <strong>Focus</strong>
-                  <span>EdTech • AI • Design</span>
                 </div>
               </div>
 
@@ -909,7 +908,7 @@
       </div>
     </section>
 
-    <!-- PROJECTS (prioritized + merged into strong set) -->
+    <!-- PROJECTS -->
     <section class="block reveal" id="projects">
       <div class="head">
         <h2 class="title">My Projects</h2>
@@ -918,7 +917,7 @@
 
       <div class="content">
         <div class="cards-grid">
-          <!-- #1: Autograder -->
+          <!-- #1 -->
           <article class="card">
             <div class="thumb">
               <span class="badge">EdTech + AI</span>
@@ -939,7 +938,7 @@
             </div>
           </article>
 
-          <!-- #2: School Records System -->
+          <!-- #2 -->
           <article class="card">
             <div class="thumb">
               <span class="badge">System</span>
@@ -960,28 +959,28 @@
             </div>
           </article>
 
-          <!-- #3: Branding Coffee -->
-          <article class="card">
-            <div class="thumb">
+          <!-- #3 (UPDATED: Branding -> larom.html + image + full-card click) -->
+          <article class="card is-link" data-href="larom.html" tabindex="0" role="link" aria-label="Open LAROM Branding page">
+            <div class="thumb thumb-img" style="background-image:url('logo_in_colors.png');">
               <span class="badge">Branding</span>
             </div>
             <div class="card-body">
-              <h4>Full Visual Identity — Coffee Project</h4>
+              <h4>Branding</h4>
               <p>
-                Complete brand identity design: logo system, colors, typography, packaging direction,
-                and social templates—built for a modern premium look.
+                A complete visual identity showcase for LAROM Entertainment Lounge — a women-only billiards,
+                board games, and café destination in Kuwait (the first of its kind in the Middle East).
               </p>
               <div class="tags">
-                <span class="tag">Design</span><span class="tag">Brand Identity</span><span class="tag">Social</span><span class="tag">Packaging</span>
+                <span class="tag">Brand Identity</span><span class="tag">Logo System</span><span class="tag">Guidelines</span><span class="tag">Mockups</span>
               </div>
               <div class="card-actions">
-                <a class="pill primary" href="#">Showcase</a>
-                <a class="pill" href="#">Mockups</a>
+                <a class="pill primary" href="larom.html">Branding</a>
+                <a class="pill" href="larom.html">View</a>
               </div>
             </div>
           </article>
 
-          <!-- #4: Apparel + Ads merged -->
+          <!-- #4 -->
           <article class="card">
             <div class="thumb">
               <span class="badge">Design</span>
@@ -1009,7 +1008,7 @@
       </div>
     </section>
 
-    <!-- SKILLS (your list) -->
+    <!-- SKILLS -->
     <section class="block reveal" id="skills">
       <div class="head">
         <h2 class="title">My Skills</h2>
@@ -1030,7 +1029,7 @@
       </div>
     </section>
 
-    <!-- CERTIFICATES (placeholders ready for your images) -->
+    <!-- CERTIFICATES -->
     <section class="block reveal" id="certificates">
       <div class="head">
         <h2 class="title">Certificates & Achievements</h2>
@@ -1041,7 +1040,6 @@
 
       <div class="content">
         <div class="cert-grid">
-          <!-- Replace each placeholder by setting background-image or putting <img> -->
           <article class="card">
             <div class="cert-thumb">
               <span class="year">2025</span>
@@ -1089,7 +1087,7 @@
       </div>
     </section>
 
-    <!-- CONTACT (no phone, website replaced with LinkedIn, form sends to email) -->
+    <!-- CONTACT -->
     <section class="block reveal" id="contact">
       <div class="head">
         <h2 class="title">Contact</h2>
@@ -1128,26 +1126,13 @@
             <div class="info">
               <div class="dot">
                 <svg class="icon" viewBox="0 0 24 24" fill="none">
-                  <path d="M16 8a6 6 0 1 1-8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M12 2v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M10 8h6M10 12h6M10 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M6 4h12v16H6z" stroke="currentColor" stroke-width="2"/>
                 </svg>
               </div>
               <div>
                 <strong>LinkedIn</strong>
                 <span><a href="https://www.linkedin.com/in/YOUR-LINKEDIN" target="_blank" rel="noopener" style="text-decoration:underline; opacity:.9;">linkedin.com/in/YOUR-LINKEDIN</a></span>
-              </div>
-            </div>
-
-            <div class="info">
-              <div class="dot">
-                <svg class="icon" viewBox="0 0 24 24" fill="none">
-                  <path d="M6 3h12v18H6z" stroke="currentColor" stroke-width="2"/>
-                  <path d="M9 7h6M9 11h6M9 15h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div>
-                <strong>Preferred Topics</strong>
-                <span>EdTech • AI tools • Design</span>
               </div>
             </div>
           </div>
@@ -1287,7 +1272,7 @@
       if(!isInside) closeDrawer();
     });
 
-    // ===== Contact form -> mailto (sends to your email via user's mail app)
+    // ===== Contact form -> mailto
     const form = document.getElementById("contactForm");
     form.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -1310,6 +1295,28 @@ ${message}
       const mailto = `mailto:${to}?subject=${encodeURIComponent(fullSubject)}&body=${encodeURIComponent(body)}`;
       window.location.href = mailto;
     });
+
+    // ===== Make whole card clickable for Larom
+    function wireCardLinks(){
+      document.querySelectorAll(".card.is-link").forEach(card => {
+        const href = card.getAttribute("data-href");
+        if(!href) return;
+
+        card.addEventListener("click", (e) => {
+          // if user clicked on a button/link inside, let it work normally
+          if(e.target.closest("a")) return;
+          window.location.href = href;
+        });
+
+        card.addEventListener("keydown", (e) => {
+          if(e.key === "Enter" || e.key === " "){
+            e.preventDefault();
+            window.location.href = href;
+          }
+        });
+      });
+    }
+    wireCardLinks();
 
     // ===== If load with hash
     if(location.hash){

@@ -1,1 +1,875 @@
-e
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LAROM — Brand Identity Portfolio</title>
+  <meta name="description" content="LAROM Entertainment Lounge brand identity portfolio case study." />
+
+  <style>
+    :root{
+      /* LAROM palette (edit if needed) */
+      --gold:#C9A24D;
+      --rose:#B07A82;
+      --green:#4F6F63;
+      --white:#FFFFFF;
+
+      --ink:#1e1a1b;
+      --muted:#6c5f62;
+
+      --bg: #fbfaf9;
+      --card: rgba(255,255,255,.72);
+      --stroke: rgba(30,26,27,.12);
+
+      --shadow: 0 18px 60px rgba(15, 12, 13, .10);
+      --shadow-soft: 0 10px 30px rgba(15, 12, 13, .08);
+
+      --radius: 20px;
+      --radius-lg: 28px;
+
+      --max: 1120px;
+      --ease: cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% 0%, rgba(176,122,130,.16), transparent 60%),
+        radial-gradient(900px 500px at 90% 10%, rgba(201,162,77,.14), transparent 55%),
+        radial-gradient(1000px 700px at 60% 100%, rgba(79,111,99,.10), transparent 55%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+
+    /* subtle paper texture */
+    body:before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
+      mix-blend-mode:multiply;
+      opacity:.55;
+    }
+
+    a{color:inherit}
+    img{max-width:100%; display:block}
+
+    .wrap{width:min(var(--max), calc(100% - 48px)); margin:0 auto}
+    .grid{
+      display:grid;
+      gap:18px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    /* Top nav */
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(251,250,249,.65);
+      border-bottom: 1px solid rgba(30,26,27,.08);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .brand-mini{
+      display:flex; align-items:center; gap:12px;
+      text-decoration:none;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background:linear-gradient(135deg, var(--gold), #f0d9a2);
+      box-shadow:0 0 0 6px rgba(201,162,77,.12);
+    }
+    .brand-mini strong{letter-spacing:.08em}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border:1px solid rgba(30,26,27,.10);
+      border-radius:999px;
+      background: rgba(255,255,255,.65);
+      box-shadow: var(--shadow-soft);
+      font-size:13px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+
+    .nav{
+      display:flex; flex-wrap:wrap;
+      gap:8px;
+      justify-content:flex-end;
+    }
+    .nav a{
+      text-decoration:none;
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid transparent;
+      color:var(--muted);
+      transition: all .25s var(--ease);
+    }
+    .nav a:hover{
+      background: rgba(176,122,130,.10);
+      border-color: rgba(176,122,130,.22);
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+    .nav a.active{
+      background: rgba(201,162,77,.12);
+      border-color: rgba(201,162,77,.35);
+      color: var(--ink);
+    }
+
+    /* Hero */
+    header{
+      padding:54px 0 24px;
+    }
+    .hero{
+      border:1px solid rgba(30,26,27,.10);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(201,162,77,.16), transparent 55%),
+        radial-gradient(900px 500px at 80% 10%, rgba(176,122,130,.18), transparent 60%),
+        rgba(255,255,255,.55);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero:after{
+      content:"";
+      position:absolute; inset:-1px;
+      background:
+        linear-gradient(120deg, transparent 0%, rgba(255,255,255,.35) 35%, transparent 70%);
+      transform: translateX(-60%);
+      animation: sheen 3.6s var(--ease) infinite;
+      opacity:.6;
+      pointer-events:none;
+    }
+    @keyframes sheen{
+      0%{transform:translateX(-60%)}
+      60%{transform:translateX(60%)}
+      100%{transform:translateX(60%)}
+    }
+
+    .hero-inner{
+      padding:34px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:22px;
+      align-items:center;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      color:var(--muted);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+    .kicker .line{
+      height:1px; width:42px;
+      background: rgba(30,26,27,.18);
+    }
+    h1{
+      margin:12px 0 10px;
+      font-size:44px;
+      line-height:1.05;
+      letter-spacing:-.02em;
+    }
+    .sub{
+      margin:0;
+      color:var(--muted);
+      font-size:16px;
+      line-height:1.6;
+      max-width: 62ch;
+    }
+
+    .cta-row{
+      margin-top:18px;
+      display:flex; flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      text-decoration:none;
+      border:1px solid rgba(30,26,27,.12);
+      background: rgba(255,255,255,.70);
+      box-shadow: var(--shadow-soft);
+      transition: all .25s var(--ease);
+      font-size:14px;
+      color:var(--ink);
+    }
+    .btn:hover{transform: translateY(-2px)}
+    .btn.primary{
+      border-color: rgba(201,162,77,.38);
+      background: linear-gradient(135deg, rgba(201,162,77,.18), rgba(176,122,130,.10));
+    }
+    .badge-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .badge{
+      border-radius: 16px;
+      border:1px solid rgba(30,26,27,.10);
+      background: rgba(255,255,255,.64);
+      padding:12px 12px;
+      box-shadow: var(--shadow-soft);
+    }
+    .badge .t{font-size:12px; color:var(--muted); letter-spacing:.08em; text-transform:uppercase}
+    .badge .v{margin-top:6px; font-weight:650}
+
+    /* Sections */
+    section{padding:32px 0}
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:12px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-.01em;
+    }
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+      max-width: 58ch;
+    }
+
+    .card{
+      grid-column: span 12;
+      border:1px solid rgba(30,26,27,.10);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.62);
+      box-shadow: var(--shadow-soft);
+      overflow:hidden;
+      position:relative;
+    }
+    .card.pad{padding:18px}
+    .card .inner{padding:18px}
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      align-items:center;
+    }
+
+    .imgframe{
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(30,26,27,.10);
+      background: rgba(255,255,255,.6);
+      position:relative;
+    }
+    .imgframe:before{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(500px 220px at 30% 20%, rgba(201,162,77,.12), transparent 60%);
+      pointer-events:none;
+    }
+    .imgframe img{
+      width:100%;
+      height:auto;
+    }
+
+    .note{
+      display:flex; gap:10px;
+      padding:12px 14px;
+      border-radius: 14px;
+      border:1px dashed rgba(30,26,27,.18);
+      background: rgba(201,162,77,.07);
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.55;
+    }
+    .note b{color:var(--ink)}
+
+    .list{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.75;
+      font-size:14px;
+    }
+
+    /* Do/Don't */
+    .two{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+    }
+    .panel{
+      border-radius: 18px;
+      border:1px solid rgba(30,26,27,.10);
+      background: rgba(255,255,255,.62);
+      box-shadow: var(--shadow-soft);
+      overflow:hidden;
+    }
+    .panel .hdr{
+      padding:12px 14px;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1px solid rgba(30,26,27,.08);
+      background: rgba(255,255,255,.55);
+      font-weight:650;
+    }
+    .tag{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(30,26,27,.10);
+      background: rgba(255,255,255,.70);
+      color:var(--muted);
+    }
+    .tag.good{border-color: rgba(79,111,99,.35); background: rgba(79,111,99,.10); color:#2d4b41}
+    .tag.bad{border-color: rgba(176,122,130,.40); background: rgba(176,122,130,.12); color:#6b3940}
+    .panel .body{padding:14px}
+
+    /* Color chips */
+    .chips{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+    .chip{
+      border-radius: 18px;
+      border:1px solid rgba(30,26,27,.10);
+      overflow:hidden;
+      background: rgba(255,255,255,.64);
+      box-shadow: var(--shadow-soft);
+    }
+    .swatch{height:72px}
+    .chip .meta{padding:10px 12px; font-size:13px; color:var(--muted)}
+    .chip .meta b{color:var(--ink)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+
+    /* Mockup gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+    }
+    .gitem{grid-column: span 6}
+    .caption{
+      padding:10px 2px 0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+    }
+
+    /* Reveal animation */
+    .reveal{
+      opacity:0;
+      transform: translateY(14px);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
+    }
+    .reveal.in{
+      opacity:1;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    footer{
+      padding:32px 0 42px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .foot{
+      border-top:1px solid rgba(30,26,27,.10);
+      padding-top:18px;
+      display:flex; flex-wrap:wrap;
+      gap:10px;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    /* Responsive */
+    @media (max-width: 940px){
+      .hero-inner{grid-template-columns: 1fr; padding:24px}
+      .badge-grid{grid-template-columns: 1fr 1fr}
+      .split{grid-template-columns: 1fr}
+      .two{grid-template-columns: 1fr}
+      .chips{grid-template-columns: 1fr 1fr}
+      .gitem{grid-column: span 12}
+      h1{font-size:36px}
+    }
+    @media (max-width: 520px){
+      .wrap{width: min(var(--max), calc(100% - 28px))}
+      .badge-grid{grid-template-columns: 1fr}
+      .chips{grid-template-columns: 1fr}
+      .nav{display:none}
+      .pill{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Sticky topbar -->
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand-mini" href="#top" aria-label="Go to top">
+        <span class="dot" aria-hidden="true"></span>
+        <div>
+          <strong style="font-size:13px">LAROM</strong>
+          <div style="font-size:12px;color:var(--muted)">Brand Identity Portfolio</div>
+        </div>
+      </a>
+
+      <div class="pill" aria-label="Project summary">
+        <span style="width:10px;height:10px;border-radius:999px;background:rgba(176,122,130,.55)"></span>
+        Kuwait • Women-only billiards lounge • Café • Board games
+      </div>
+
+      <nav class="nav" aria-label="Table of contents">
+        <a href="#toc">Index</a>
+        <a href="#logo">Logo</a>
+        <a href="#meaning">Meaning</a>
+        <a href="#construction">Construction</a>
+        <a href="#measurements">Measurements</a>
+        <a href="#logoColors">Logo Colors</a>
+        <a href="#placements">Placements</a>
+        <a href="#misuse">Misuse</a>
+        <a href="#palette">Colors</a>
+        <a href="#typography">Typography</a>
+        <a href="#mockups">Mockups</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- TITLE -->
+  <header id="top" class="wrap">
+    <div class="hero reveal">
+      <div class="hero-inner">
+        <div>
+          <div class="kicker"><span class="line"></span> Brand Identity Portfolio</div>
+          <h1>LAROM Entertainment Lounge</h1>
+          <p class="sub">
+            A women-only entertainment lounge in Kuwait built for billiards players—featuring premium billiard tables,
+            board games, and a café. This portfolio presents the visual identity system for a luxurious, warm, modern brand.
+          </p>
+          <div class="cta-row">
+            <a class="btn primary" href="#toc">View Index ↓</a>
+            <a class="btn" href="#mockups">Skip to Mockups</a>
+          </div>
+        </div>
+
+        <div class="badge-grid">
+          <div class="badge">
+            <div class="t">Brand Tone</div>
+            <div class="v">Luxury • Warm • Modern</div>
+          </div>
+          <div class="badge">
+            <div class="t">Audience</div>
+            <div class="v">Women (12–50)</div>
+          </div>
+          <div class="badge">
+            <div class="t">Core Offer</div>
+            <div class="v">Billiards • Café • Board Games</div>
+          </div>
+          <div class="badge">
+            <div class="t">Signature Detail</div>
+            <div class="v">Heart “O” in Wordmark</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- INDEX -->
+    <section id="toc" class="reveal">
+      <div class="section-head">
+        <h2>Index</h2>
+        <p>Navigate the full brand identity portfolio smoothly. Sections follow your requested order.</p>
+      </div>
+
+      <div class="card pad">
+        <div class="grid">
+          <div class="card pad" style="grid-column: span 6;">
+            <h3 style="margin:0 0 10px; font-size:18px;">Brand System</h3>
+            <ol class="list" style="padding-left:18px">
+              <li><a href="#logo">Primary Logo</a></li>
+              <li><a href="#meaning">Logo Meaning</a></li>
+              <li><a href="#construction">Logo Construction</a></li>
+              <li><a href="#measurements">Logo Measurements</a></li>
+              <li><a href="#logoColors">Logo in Colors</a></li>
+              <li><a href="#placements">Logo Placement</a></li>
+              <li><a href="#misuse">Incorrect Usage</a></li>
+              <li><a href="#palette">Color Palette</a></li>
+              <li><a href="#typography">Typography</a></li>
+              <li><a href="#mockups">Mockups</a></li>
+            </ol>
+          </div>
+
+          <div class="card pad" style="grid-column: span 6;">
+            <h3 style="margin:0 0 10px; font-size:18px;">Image Filenames</h3>
+            <ul class="list" style="margin:0">
+              <li><span class="mono">logo.png</span></li>
+              <li><span class="mono">logo2.png</span></li>
+              <li><span class="mono">logo_create.png</span></li>
+              <li><span class="mono">logo_space.png</span></li>
+              <li><span class="mono">logo_in_colors.png</span></li>
+              <li><span class="mono">logo_used.png</span></li>
+              <li><span class="mono">colors.png</span> (optional)</li>
+              <li><span class="mono">typography.png</span> (optional)</li>
+              <li><span class="mono">mockup1.png</span> <span class="mono">mockup2.png</span> <span class="mono">mockup3.png</span> <span class="mono">mockup4.png</span></li>
+            </ul>
+
+            <div class="note" style="margin-top:12px">
+              <div aria-hidden="true">✅</div>
+              <div>
+                Put all images in the same folder as this HTML file. If your image is JPG, just change <span class="mono">.png</span> to <span class="mono">.jpg</span> in the code.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRIMARY LOGO -->
+    <section id="logo" class="reveal">
+      <div class="section-head">
+        <h2>Primary Logo</h2>
+        <p>The main wordmark used across signage, menus, reservations, and social media.</p>
+      </div>
+
+      <div class="card">
+        <div class="inner split">
+          <div>
+            <h3 style="margin:0 0 10px; font-size:18px;">Wordmark</h3>
+            <p class="sub" style="margin:0 0 12px">
+              The LAROM wordmark is designed to feel premium and feminine—refined serif typography paired with a heart symbol
+              replacing the “O” to add warmth and a signature identity.
+            </p>
+            <div class="note">
+              <div aria-hidden="true">✔</div>
+              <div><b>Use:</b> Prefer this version whenever space allows. Keep it clean and uncluttered.</div>
+            </div>
+          </div>
+
+          <div class="imgframe">
+            <img src="logo.png" alt="LAROM primary logo (wordmark)" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO MEANING -->
+    <section id="meaning" class="reveal">
+      <div class="section-head">
+        <h2>Logo Meaning</h2>
+        <p>The symbol and typography reflect the brand promise: luxury, comfort, and a women-only community.</p>
+      </div>
+
+      <div class="card">
+        <div class="inner split">
+          <div class="imgframe">
+            <img src="logo2.png" alt="LAROM logo meaning visual" />
+          </div>
+
+          <div>
+            <h3 style="margin:0 0 10px; font-size:18px;">Design Rationale</h3>
+            <ul class="list" style="margin:0 0 12px">
+              <li><b>Heart “O”:</b> warmth, privacy, and belonging—built for women players.</li>
+              <li><b>Elegant serif:</b> premium lounge feel, refined atmosphere, confident tone.</li>
+              <li><b>Gold accent:</b> luxurious detail for signage and brand moments.</li>
+              <li><b>Balanced rhythm:</b> calm spacing that feels modern and intentional.</li>
+            </ul>
+            <div class="note">
+              <div aria-hidden="true">🎯</div>
+              <div><b>Positioning:</b> the first women-only billiards lounge concept of its kind in the Middle East.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO CONSTRUCTION -->
+    <section id="construction" class="reveal">
+      <div class="section-head">
+        <h2>Logo Construction</h2>
+        <p>Construction guide showing the logic of proportions and optical alignment.</p>
+      </div>
+
+      <div class="card">
+        <div class="inner">
+          <div class="imgframe">
+            <img src="logo_create.png" alt="LAROM logo construction guide" />
+          </div>
+          <p class="caption">
+            Keep the heart shape optically centered and consistent in stroke weight. Avoid altering the internal curves.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO MEASUREMENTS -->
+    <section id="measurements" class="reveal">
+      <div class="section-head">
+        <h2>Logo Measurements</h2>
+        <p>Spacing rules for digital and print: clear space, alignment, and minimum size.</p>
+      </div>
+
+      <div class="card">
+        <div class="inner">
+          <div class="imgframe">
+            <img src="logo_space.png" alt="LAROM logo measurements and clear space" />
+          </div>
+          <div class="note" style="margin-top:12px">
+            <div aria-hidden="true">📏</div>
+            <div>
+              <b>Clear space:</b> preserve a minimum buffer around the logo to maintain elegance and legibility.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO IN COLORS -->
+    <section id="logoColors" class="reveal">
+      <div class="section-head">
+        <h2>Logo in Colors</h2>
+        <p>Approved color variations for light and dark backgrounds.</p>
+      </div>
+
+      <div class="card">
+        <div class="inner">
+          <div class="imgframe">
+            <img src="logo_in_colors.png" alt="LAROM logo color variations" />
+          </div>
+          <p class="caption">
+            Use gold on soft light backgrounds for a premium feel, and white/gold versions on deeper tones for contrast.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOGO PLACEMENT -->
+    <section id="placements" class="reveal">
+      <div class="section-head">
+        <h2>Logo Placement</h2>
+        <p>Recommended placements across documents, signage, apparel, and digital templates.</p>
+      </div>
+
+      <div class="card">
+        <div class="inner split">
+          <div>
+            <h3 style="margin:0 0 10px; font-size:18px;">Placement Rules</h3>
+            <ul class="list">
+              <li>Top center on menus and brand documents</li>
+              <li>Top-left on invoices/receipts with clear space</li>
+              <li>Centered as a header on social templates</li>
+              <li>On apparel: chest placement with restrained size</li>
+            </ul>
+            <div class="note" style="margin-top:12px">
+              <div aria-hidden="true">🧩</div>
+              <div><b>Consistency:</b> fixed margins and scale rules build recognition.</div>
+            </div>
+          </div>
+          <div class="imgframe">
+            <img src="logo_used.png" alt="LAROM logo placement examples" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MISUSE -->
+    <section id="misuse" class="reveal">
+      <div class="section-head">
+        <h2>Incorrect Usage</h2>
+        <p>Misuse examples to protect consistency and brand value.</p>
+      </div>
+
+      <div class="two">
+        <div class="panel">
+          <div class="hdr">Do <span class="tag good">Correct</span></div>
+          <div class="body">
+            <ul class="list">
+              <li>Use only the approved palette (gold / dusty rose / green / white)</li>
+              <li>Keep proportions unchanged</li>
+              <li>Maintain clear space</li>
+              <li>Ensure high contrast on any background</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="hdr">Don’t <span class="tag bad">Incorrect</span></div>
+          <div class="body">
+            <ul class="list">
+              <li>Stretch, skew, rotate, or distort</li>
+              <li>Add heavy shadows, bevels, or unapproved effects</li>
+              <li>Change the heart shape or replace it with another symbol</li>
+              <li>Place the logo over busy photos without contrast control</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLOR PALETTE -->
+    <section id="palette" class="reveal">
+      <div class="section-head">
+        <h2>Color Palette</h2>
+        <p>Gold and dusty rose define luxury and femininity, supported by calm green and clean white.</p>
+      </div>
+
+      <div class="card pad">
+        <div class="grid">
+          <div style="grid-column: span 6;">
+            <div class="imgframe">
+              <img src="colors.png" alt="LAROM palette reference (optional)" />
+            </div>
+          </div>
+
+          <div style="grid-column: span 6;">
+            <h3 style="margin:0 0 10px; font-size:18px;">Recommended Colors</h3>
+            <div class="chips">
+              <div class="chip">
+                <div class="swatch" style="background:var(--gold)"></div>
+                <div class="meta"><b>Gold</b><br><span class="mono">#C9A24D</span></div>
+              </div>
+              <div class="chip">
+                <div class="swatch" style="background:var(--rose)"></div>
+                <div class="meta"><b>Dusty Rose</b><br><span class="mono">#B07A82</span></div>
+              </div>
+              <div class="chip">
+                <div class="swatch" style="background:var(--green)"></div>
+                <div class="meta"><b>Calm Green</b><br><span class="mono">#4F6F63</span></div>
+              </div>
+              <div class="chip">
+                <div class="swatch" style="background:var(--white); border-top:1px solid rgba(30,26,27,.10)"></div>
+                <div class="meta"><b>White</b><br><span class="mono">#FFFFFF</span></div>
+              </div>
+            </div>
+
+            <div class="note" style="margin-top:12px">
+              <div aria-hidden="true">🎨</div>
+              <div><b>Suggested ratio:</b> Dusty Rose 50% • White 25% • Gold 15% • Green 10%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section id="typography" class="reveal">
+      <div class="section-head">
+        <h2>Typography</h2>
+        <p>Elegant serif headlines + modern sans body text for clarity across menu, web, and social media.</p>
+      </div>
+
+      <div class="card">
+        <div class="inner split">
+          <div>
+            <h3 style="margin:0 0 10px; font-size:18px;">Type System</h3>
+            <ul class="list" style="margin:0 0 12px">
+              <li><b>Primary (Headlines):</b> Playfair Display — luxury and classic tone</li>
+              <li><b>Secondary (Body / UI):</b> Poppins — clean and highly readable</li>
+              <li><b>Optional Arabic pairing:</b> Cairo — balanced for bilingual layouts</li>
+            </ul>
+            <div class="note">
+              <div aria-hidden="true">🔤</div>
+              <div><b>Rule:</b> Use two fonts max per design to keep the system consistent.</div>
+            </div>
+          </div>
+
+          <div class="imgframe">
+            <img src="typography.png" alt="LAROM typography reference (optional)" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MOCKUPS -->
+    <section id="mockups" class="reveal">
+      <div class="section-head">
+        <h2>Mockup Showcase</h2>
+        <p>Brand applications across merchandise, stationery, and digital materials.</p>
+      </div>
+
+      <div class="gallery">
+        <div class="gitem">
+          <div class="imgframe"><img src="mockup1.png" alt="LAROM mockup 1" /></div>
+          <div class="caption">Mockup 01 — Merchandise / packaging.</div>
+        </div>
+        <div class="gitem">
+          <div class="imgframe"><img src="mockup2.png" alt="LAROM mockup 2" /></div>
+          <div class="caption">Mockup 02 — Menu / stationery system.</div>
+        </div>
+        <div class="gitem">
+          <div class="imgframe"><img src="mockup3.png" alt="LAROM mockup 3" /></div>
+          <div class="caption">Mockup 03 — Apparel / accessories.</div>
+        </div>
+        <div class="gitem">
+          <div class="imgframe"><img src="mockup4.png" alt="LAROM mockup 4" /></div>
+          <div class="caption">Mockup 04 — Web / social templates.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="foot">
+        <div>© <span id="y"></span> LAROM Entertainment Lounge — Brand Identity Portfolio</div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <span class="tag">Women-only • Kuwait</span>
+          <a class="btn" href="#top">Back to top ↑</a>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // Current year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Reveal animation on scroll
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold: 0.12});
+    els.forEach(el => io.observe(el));
+
+    // Active nav state
+    const navLinks = Array.from(document.querySelectorAll('.nav a'));
+    const sectionIds = navLinks.map(a => a.getAttribute('href')).filter(Boolean);
+
+    const sections = sectionIds
+      .map(id => document.querySelector(id))
+      .filter(Boolean);
+
+    const navIO = new IntersectionObserver((entries)=>{
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b)=> b.intersectionRatio - a.intersectionRatio)[0];
+
+      if(!visible) return;
+
+      const id = '#' + visible.target.id;
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+    }, {rootMargin: "-40% 0px -55% 0px", threshold: [0.12, 0.25, 0.5]});
+
+    sections.forEach(s => navIO.observe(s));
+  </script>
+</body>
+</html>

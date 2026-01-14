@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practical Exams Auto-Grader (Python) | Portfolio</title>
+  <meta name="description" content="A Python-based Practical Exams Auto-Grader for Scratch 3, HTML, Python, and Open Robotic Lab. Cuts grading time from 20–30 minutes to seconds with detailed skill reports." />
+
+  <style>
+    :root{
+      --bg0:#070A14;
+      --bg1:#081126;
+      --surface: rgba(255,255,255,.06);
+      --surface2: rgba(255,255,255,.045);
+      --line: rgba(255,255,255,.12);
+      --line2: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --muted2: rgba(255,255,255,.52);
+
+      --a1:#18E1C3;
+      --a2:#5B7CFF;
+      --a3:#B84CFF;
+      --a4:#FF4CB8;
+
+      --shadow: 0 20px 70px rgba(0,0,0,.55);
+      --shadow2: 0 12px 40px rgba(0,0,0,.40);
+      --r: 18px;
+      --r2: 24px;
+      --max: 1120px;
+      --navH: 72px;
+
+      --ease: cubic-bezier(.2,.8,.2,1);
+      --t: 460ms;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                   "Segoe UI", Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1100px 560px at 10% 0%, rgba(184,76,255,.12), transparent 60%),
+        radial-gradient(1100px 560px at 90% 10%, rgba(24,225,195,.10), transparent 60%),
+        radial-gradient(700px 420px at 50% 100%, rgba(255,76,184,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      min-height:100vh;
+      overflow-x:hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a{ color:inherit; text-decoration:none; }
+
+    .container{
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      padding: 0 18px 90px;
+    }
+
+    /* ===== Top nav ===== */
+    .nav-wrap{
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(120,120,120,.28), rgba(120,120,120,.18));
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .nav{
+      height: var(--navH);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 0;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+    .brand .mark{
+      width: 40px; height: 40px;
+      border-radius: 14px;
+      display:grid;
+      place-items:center;
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(91,124,255,.20), rgba(24,225,195,.16));
+      box-shadow: var(--shadow2);
+    }
+    .brand b{
+      background: linear-gradient(90deg, var(--a1), var(--a2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-weight: 950;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      max-width: 52vw;
+    }
+    .nav-actions{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+    }
+    .chip{
+      border-radius: 999px;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: var(--shadow2);
+      font-size: 12px;
+      font-weight: 850;
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      cursor:pointer;
+      transition: transform 220ms var(--ease), background 220ms var(--ease);
+    }
+    .chip:hover{ transform: translateY(-2px); background: rgba(255,255,255,.10); }
+    .chip.primary{
+      background: linear-gradient(90deg, rgba(24,225,195,.92), rgba(91,124,255,.92));
+      color:#071018;
+      border-color: rgba(255,255,255,.18);
+      font-weight: 950;
+    }
+
+    /* ===== Hero ===== */
+    .hero{
+      margin-top: 22px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(900px 520px at 20% 10%, rgba(24,225,195,.16), transparent 60%),
+        radial-gradient(900px 520px at 80% 20%, rgba(91,124,255,.14), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.35));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(320px 320px at var(--mx, 30%) var(--my, 30%), rgba(255,255,255,.12), transparent 66%),
+        radial-gradient(520px 320px at calc(var(--mx, 30%) + 18%) calc(var(--my, 30%) + 12%), rgba(255,255,255,.06), transparent 70%);
+      opacity:.7;
+      pointer-events:none;
+      mix-blend-mode: screen;
+      transition: opacity 260ms var(--ease);
+    }
+    .hero-inner{
+      padding: 72px 20px 54px;
+      text-align:center;
+      position:relative;
+    }
+    .kicker{
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: rgba(255,255,255,.72);
+    }
+    .hero h1{
+      margin: 14px 0 10px;
+      font-size: clamp(38px, 6.0vw, 66px);
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      background: linear-gradient(90deg, var(--a1), var(--a2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      filter: drop-shadow(0 14px 35px rgba(0,0,0,.35));
+    }
+    .hero p{
+      margin: 0 auto 18px;
+      max-width: 86ch;
+      color: rgba(255,255,255,.70);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+    .hero-meta{
+      margin-top: 18px;
+      display:flex;
+      gap: 10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      color: rgba(255,255,255,.62);
+      font-size: 12px;
+    }
+    .meta-pill{
+      border-radius: 999px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+    }
+
+    /* ===== Layout blocks ===== */
+    section.block{
+      margin-top: 18px;
+      border-radius: var(--r2);
+      border: 1px solid var(--line2);
+      background: var(--surface2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .head{
+      padding: 24px 20px 0;
+      text-align:center;
+    }
+    .title{
+      margin:0;
+      font-size: clamp(22px, 3.2vw, 36px);
+      font-weight: 950;
+      letter-spacing: -0.03em;
+      background: linear-gradient(90deg, var(--a1), rgba(255,255,255,.92));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .subtitle{
+      margin: 10px auto 0;
+      max-width: 92ch;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .content{ padding: 18px; }
+
+    /* ===== TOC ===== */
+    .toc{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    @media (min-width: 860px){ .toc{ grid-template-columns: 1fr 1fr; } }
+    .toc a{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      padding: 12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      transition: transform 220ms var(--ease), background 220ms var(--ease), border-color 220ms var(--ease);
+    }
+    .toc a:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.18);
+    }
+    .toc b{ font-size: 13px; letter-spacing: .01em; }
+    .toc span{ font-size: 12px; color: var(--muted); }
+
+    /* ===== Stats ===== */
+    .stats{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    @media (min-width: 980px){ .stats{ grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 720px) and (max-width: 979px){ .stats{ grid-template-columns: repeat(2, 1fr); } }
+    .stat{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.18);
+      box-shadow: var(--shadow2);
+      padding: 14px;
+      text-align:left;
+      position:relative;
+      overflow:hidden;
+    }
+    .stat::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(420px 220px at 20% 20%, rgba(24,225,195,.12), transparent 62%),
+        radial-gradient(420px 220px at 80% 30%, rgba(91,124,255,.10), transparent 62%);
+      opacity:.7;
+      pointer-events:none;
+    }
+    .stat strong{
+      display:block;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      position:relative;
+    }
+    .stat span{
+      display:block;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.6;
+      position:relative;
+    }
+
+    /* ===== Feature list ===== */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    @media (min-width: 980px){ .grid.two{ grid-template-columns: 1fr 1fr; } }
+
+    .card{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow2);
+      padding: 14px;
+    }
+    .card h3{
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+    .list{
+      margin:0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    /* ===== Timeline/flow ===== */
+    .flow{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    @media (min-width: 980px){ .flow{ grid-template-columns: repeat(4, 1fr); } }
+    .step{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      box-shadow: var(--shadow2);
+      padding: 14px;
+    }
+    .step .n{
+      width: 34px; height: 34px;
+      border-radius: 14px;
+      display:grid;
+      place-items:center;
+      border: 1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(24,225,195,.20), rgba(91,124,255,.16));
+      font-weight: 950;
+      margin-bottom: 10px;
+    }
+    .step b{ display:block; margin-bottom: 6px; font-size: 13px; }
+    .step p{ margin:0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+
+    /* ===== Screenshots ===== */
+    .shots{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    @media (min-width: 980px){ .shots{ grid-template-columns: 1fr 1fr; } }
+    .shot{
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    .cap{
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+    .cap strong{ font-size: 13px; }
+    .cap em{ font-style:normal; font-size:12px; color: var(--muted); }
+
+    .imgwrap{
+      width:100%;
+      aspect-ratio: 16/10;
+      background:
+        radial-gradient(500px 260px at 20% 20%, rgba(24,225,195,.14), transparent 62%),
+        radial-gradient(500px 260px at 80% 30%, rgba(91,124,255,.12), transparent 62%),
+        rgba(0,0,0,.18);
+      display:grid;
+      place-items:center;
+      position:relative;
+    }
+    .imgwrap img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+    .imgwrap .ph{
+      position:absolute;
+      inset:auto auto 12px 12px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.25);
+      color: rgba(255,255,255,.85);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .03em;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* ===== Footer ===== */
+    footer{
+      margin-top: 18px;
+      padding: 18px 6px 0;
+      color: var(--muted2);
+      font-size: 12px;
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    /* Reveal on scroll */
+    .reveal{
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+    }
+    .reveal.in{ opacity: 1; transform: translateY(0); }
+
+    /* Back to top */
+    .topbtn{
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 80;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.35);
+      color: rgba(255,255,255,.92);
+      padding: 12px 14px;
+      font-size: 12px;
+      font-weight: 950;
+      cursor:pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: var(--shadow2);
+      transform: translateY(14px);
+      opacity: 0;
+      pointer-events:none;
+      transition: transform 220ms var(--ease), opacity 220ms var(--ease);
+    }
+    .topbtn.on{
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events:auto;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="topbtn" id="topBtn" aria-label="Back to top">↑ Top</button>
+
+  <div class="nav-wrap">
+    <div class="container">
+      <div class="nav">
+        <div class="brand" aria-label="Auto-Grader page">
+          <span class="mark">A</span>
+          <b>Practical Exams Auto-Grader</b>
+        </div>
+
+        <div class="nav-actions">
+          <!-- إذا تبي تربطه بالصفحة الرئيسية، غيّر الرابط إلى index.html -->
+          <a class="chip" href="index.html">← Main Portfolio</a>
+          <a class="chip primary" href="#toc">Overview</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- HERO -->
+    <header class="hero reveal" id="top">
+      <div class="hero-inner" id="heroArea">
+        <div class="kicker">EdTech Automation • Python</div>
+        <h1>Practical Exams Auto-Grader</h1>
+        <p>
+          A Python-based tool that automatically grades students’ practical exams for
+          <b>Scratch 3</b>, <b>HTML</b>, <b>Python</b>, and <b>Open Robotic Lab</b>.
+          It reduced grading time from <b>20–30 minutes per class</b> to <b>seconds</b> while generating
+          detailed skill-level feedback and a full report for each student.
+        </p>
+
+        <div class="hero-meta">
+          <span class="meta-pill">Multiple exam models</span>
+          <span class="meta-pill">Unified grading rubric</span>
+          <span class="meta-pill">Tolerance for minor mistakes</span>
+          <span class="meta-pill">Instant reports</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- TOC -->
+    <section class="block reveal" id="toc">
+      <div class="head">
+        <h2 class="title">Table of Contents</h2>
+        <p class="subtitle">Click to jump to the section.</p>
+      </div>
+      <div class="content">
+        <div class="toc">
+          <a href="#impact"><b>01 — Impact</b><span>time saved & outcomes</span></a>
+          <a href="#features"><b>02 — Key Features</b><span>what makes it strong</span></a>
+          <a href="#workflow"><b>03 — Workflow</b><span>how it works</span></a>
+          <a href="#rubric"><b>04 — Skills & Reporting</b><span>rubrics + report output</span></a>
+          <a href="#screens"><b>05 — Screens / Samples</b><span>images placeholders</span></a>
+          <a href="#stack"><b>06 — Tech Stack</b><span>libraries & structure</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impact -->
+    <section class="block reveal" id="impact">
+      <div class="head">
+        <h2 class="title">Impact</h2>
+        <p class="subtitle">
+          The core value: speed, consistency, and deeper feedback without increasing teacher workload.
+        </p>
+      </div>
+      <div class="content">
+        <div class="stats">
+          <div class="stat">
+            <strong>20–30 min → seconds</strong>
+            <span>Grading time per class reduced dramatically with automated scoring.</span>
+          </div>
+          <div class="stat">
+            <strong>0 manual inconsistency</strong>
+            <span>Unified grading approach across classes and exam versions.</span>
+          </div>
+          <div class="stat">
+            <strong>Multi-model aware</strong>
+            <span>Detects and grades different exam models accurately.</span>
+          </div>
+          <div class="stat">
+            <strong>Detailed reports</strong>
+            <span>Skill-level breakdown + summary feedback for each student.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="block reveal" id="features">
+      <div class="head">
+        <h2 class="title">Key Features</h2>
+        <p class="subtitle">
+          Built for real classroom constraints: small typos, spacing issues, and accidental symbols.
+        </p>
+      </div>
+      <div class="content">
+        <div class="grid two">
+          <div class="card">
+            <h3>Accuracy & Reliability</h3>
+            <ul class="list">
+              <li>Distinguishes between different exam models automatically.</li>
+              <li>Prevents common grading errors via rule-based checks.</li>
+              <li>Outputs consistent results across all students.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Human-Friendly Tolerance</h3>
+            <ul class="list">
+              <li>Handles minor spelling mistakes and spacing differences.</li>
+              <li>Ignores accidental extra characters/symbols when safe.</li>
+              <li>Focuses on learning outcomes, not formatting traps.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid two">
+          <div class="card">
+            <h3>Standardized Rubrics</h3>
+            <ul class="list">
+              <li>Same rubric logic across Scratch/HTML/Python/Robotics.</li>
+              <li>Modular skill checks (easy to add or adjust).</li>
+              <li>Clear point distribution per skill.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Reporting</h3>
+            <ul class="list">
+              <li>Full report per student (skills + score + notes).</li>
+              <li>Class summary for quick review.</li>
+              <li>Export-ready output (PDF/Doc/CSV depending on setup).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Workflow -->
+    <section class="block reveal" id="workflow">
+      <div class="head">
+        <h2 class="title">Workflow</h2>
+        <p class="subtitle">A simple flow designed to match real exam file submission patterns.</p>
+      </div>
+      <div class="content">
+        <div class="flow">
+          <div class="step">
+            <div class="n">1</div>
+            <b>Collect Submissions</b>
+            <p>Reads students’ files/projects (Scratch, HTML, Python, Robotics outputs).</p>
+          </div>
+          <div class="step">
+            <div class="n">2</div>
+            <b>Detect Exam Model</b>
+            <p>Identifies the correct model/version and loads matching rubric rules.</p>
+          </div>
+          <div class="step">
+            <div class="n">3</div>
+            <b>Evaluate Skills</b>
+            <p>Checks required skills and applies tolerance logic for minor mistakes.</p>
+          </div>
+          <div class="step">
+            <div class="n">4</div>
+            <b>Generate Reports</b>
+            <p>Creates detailed student reports + class summary in seconds.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rubric & Reporting -->
+    <section class="block reveal" id="rubric">
+      <div class="head">
+        <h2 class="title">Skills & Reporting</h2>
+        <p class="subtitle">
+          Reports are structured around measurable skills, making feedback clear for students and parents.
+        </p>
+      </div>
+      <div class="content">
+        <div class="grid two">
+          <div class="card">
+            <h3>Example Skill Categories</h3>
+            <ul class="list">
+              <li><b>Scratch 3:</b> events, loops, conditions, variables, sprites, logic.</li>
+              <li><b>HTML:</b> structure, semantic tags, forms, links, images, styling rules.</li>
+              <li><b>Python:</b> variables, I/O, conditions, loops, functions, correctness.</li>
+              <li><b>Open Robotic Lab:</b> sensors, logic flow, movement tasks, outcomes.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Report Output (Typical)</h3>
+            <ul class="list">
+              <li>Student name / ID, exam model, final score.</li>
+              <li>Skill-by-skill checklist with points.</li>
+              <li>Notes for partial credit and detected mistakes.</li>
+              <li>Summary recommendations (next steps).</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Screens / Samples -->
+    <section class="block reveal" id="screens">
+      <div class="head">
+        <h2 class="title">Screens / Samples</h2>
+        <p class="subtitle">
+          Replace these placeholders with real screenshots from your tool (UI, reports, outputs).
+        </p>
+      </div>
+      <div class="content">
+        <div class="shots">
+          <div class="shot">
+            <div class="cap">
+              <strong>Report Sample</strong>
+              <em>File: autograder_report.png</em>
+            </div>
+            <div class="imgwrap">
+              <img src="autograder_report.png" alt="Auto-Grader report sample" />
+              <div class="ph">autograder_report.png</div>
+            </div>
+          </div>
+
+          <div class="shot">
+            <div class="cap">
+              <strong>Dashboard / Summary</strong>
+              <em>File: autograder_summary.png</em>
+            </div>
+            <div class="imgwrap">
+              <img src="autograder_summary.png" alt="Auto-Grader class summary" />
+              <div class="ph">autograder_summary.png</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="shots" style="margin-top:12px;">
+          <div class="shot">
+            <div class="cap">
+              <strong>Model Detection</strong>
+              <em>File: autograder_models.png</em>
+            </div>
+            <div class="imgwrap">
+              <img src="autograder_models.png" alt="Auto-Grader model detection" />
+              <div class="ph">autograder_models.png</div>
+            </div>
+          </div>
+
+          <div class="shot">
+            <div class="cap">
+              <strong>Skill Breakdown</strong>
+              <em>File: autograder_skills.png</em>
+            </div>
+            <div class="imgwrap">
+              <img src="autograder_skills.png" alt="Auto-Grader skill breakdown" />
+              <div class="ph">autograder_skills.png</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;color:var(--muted2);font-size:12px;line-height:1.6;">
+          Tip: If you don’t have screenshots yet, export 2–4 report pages as images and name them like above.
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="block reveal" id="stack">
+      <div class="head">
+        <h2 class="title">Tech Stack</h2>
+        <p class="subtitle">This section is written generically—replace items with your exact libraries/tools.</p>
+      </div>
+      <div class="content">
+        <div class="grid two">
+          <div class="card">
+            <h3>Core</h3>
+            <ul class="list">
+              <li>Python (grading engine + rules)</li>
+              <li>File parsing (per platform: Scratch/HTML/Python/Robotics)</li>
+              <li>Rule-based rubric modules (per exam model)</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Outputs</h3>
+            <ul class="list">
+              <li>Report generation (PDF/Word/HTML/CSV)</li>
+              <li>Class summary export for quick review</li>
+              <li>Structured logs for audit & debugging</li>
+            </ul>
+          </div>
+        </div>
+
+        <footer>
+          <div>
+            <b style="background:linear-gradient(90deg,var(--a1),var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent;">
+              Practical Exams Auto-Grader
+            </b>
+            • Python
+          </div>
+          <div>© <span id="year"></span> All rights reserved.</div>
+        </footer>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Hero glow
+    const hero = document.getElementById("heroArea");
+    function setHeroGlow(e){
+      const r = hero.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 100;
+      const y = ((e.clientY - r.top) / r.height) * 100;
+      hero.parentElement.style.setProperty("--mx", x.toFixed(1) + "%");
+      hero.parentElement.style.setProperty("--my", y.toFixed(1) + "%");
+    }
+    hero.addEventListener("mousemove", setHeroGlow);
+
+    // Smooth scroll with sticky offset
+    function scrollToId(id){
+      const el = document.querySelector(id);
+      if(!el) return;
+      const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--navH')) || 72;
+      const top = el.getBoundingClientRect().top + window.pageYOffset - (navH + 14);
+      window.scrollTo({ top, behavior: "smooth" });
+    }
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener("click", (e) => {
+        const href = a.getAttribute("href");
+        if(!href || href === "#") return;
+        e.preventDefault();
+        scrollToId(href);
+        history.replaceState(null, "", href);
+      });
+    });
+
+    // Reveal on scroll
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("in");
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(".reveal").forEach(el => revealObs.observe(el));
+
+    // Back to top
+    const topBtn = document.getElementById("topBtn");
+    function onScroll(){
+      const s = document.documentElement.scrollTop || document.body.scrollTop;
+      topBtn.classList.toggle("on", s > 520);
+    }
+    window.addEventListener("scroll", onScroll, { passive:true });
+    onScroll();
+
+    topBtn.addEventListener("click", () => scrollToId("#top"));
+
+    // If open with hash
+    if(location.hash){
+      setTimeout(() => scrollToId(location.hash), 60);
+    }
+  </script>
+</body>
+</html>
